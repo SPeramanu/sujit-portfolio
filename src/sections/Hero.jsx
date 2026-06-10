@@ -1,0 +1,54 @@
+import ParticleCanvas from '../components/ParticleCanvas.jsx';
+import GlitchText from '../components/GlitchText.jsx';
+import useTypewriter from '../hooks/useTypewriter.js';
+import { profile } from '../data/profile.js';
+
+export default function Hero() {
+  const tagline = useTypewriter(profile.taglines);
+
+  return (
+    <section id="hero" className="hero">
+      <ParticleCanvas />
+      <div className="hero-grid-overlay" aria-hidden="true" />
+
+      <div className="hero-content">
+        <div className="hero-pretitle">// SYSTEM ONLINE — OPERATOR IDENTIFIED</div>
+        <h1 className="hero-name">
+          <GlitchText text={profile.name} />
+        </h1>
+        <div className="hero-tagline">
+          <span className="prompt">&gt;</span> {tagline}
+          <span className="type-cursor">█</span>
+        </div>
+        <p className="hero-blurb">
+          Building robots that see, learn, and act — from lunar rovers to
+          surgical manipulators.
+        </p>
+        <div className="hero-cta">
+          <a href="#projects" className="btn btn-primary">
+            VIEW PROJECTS
+          </a>
+          <a href="#contact" className="btn btn-ghost">
+            ESTABLISH CONTACT
+          </a>
+        </div>
+      </div>
+
+      <div className="hero-hud-left" aria-hidden="true">
+        <div>LAT 43.6629°N</div>
+        <div>LNG 79.3957°W</div>
+        <div>UOFT // ENGSCI ROBOTICS</div>
+      </div>
+      <div className="hero-hud-right" aria-hidden="true">
+        <div>PWR ████████░░ 87%</div>
+        <div>SIG ██████████ 100%</div>
+        <div>MODE: AUTONOMOUS</div>
+      </div>
+
+      <a href="#about" className="scroll-indicator" aria-label="Scroll to about">
+        <span className="scroll-chevron">▼</span>
+        <span className="scroll-text">SCROLL TO INITIATE</span>
+      </a>
+    </section>
+  );
+}
