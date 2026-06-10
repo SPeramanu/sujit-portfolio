@@ -8,7 +8,8 @@
       "PowerShell($env:Path = [Environment]::GetEnvironmentVariable\\('Path','Machine'\\) + ';' + [Environment]::GetEnvironmentVariable\\('Path','User'\\); npm run build)",
       "PowerShell($env:Path = [Environment]::GetEnvironmentVariable\\('Path','Machine'\\) + ';' + [Environment]::GetEnvironmentVariable\\('Path','User'\\); npm run preview)",
       "PowerShell($env:Path = [Environment]::GetEnvironmentVariable\\('Path','Machine'\\) + ';' + [Environment]::GetEnvironmentVariable\\('Path','User'\\); cd \"c:\\\\Users\\\\Sumed\\\\Downloads\\\\Sujit\\\\sujit-portfolio\"; git init; git add -A; git commit -m \"Initial portfolio — Vite+React HUD-themed site with globe page\")",
-      "PowerShell(winget install Git.Git --accept-source-agreements --accept-package-agreements --silent)"
+      "PowerShell(winget install Git.Git --accept-source-agreements --accept-package-agreements --silent)",
+      "PowerShell($env:Path = [Environment]::GetEnvironmentVariable\\('Path','Machine'\\) + ';' + [Environment]::GetEnvironmentVariable\\('Path','User'\\); cd \"c:\\\\Users\\\\Sumed\\\\Downloads\\\\Sujit\\\\sujit-portfolio\"; git config --global user.email \"sujitp2003@gmail.com\"; git config --global user.name \"Sujit Peramanu\"; git commit -m \"Initial portfolio — Vite+React HUD-themed site with globe page\")"
     ]
   }
 }
