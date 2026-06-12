@@ -82,3 +82,8 @@ Until then the form shows a "not configured" notice with your email as fallback.
 
 - `/` — Hero, About, Experience, Projects, Photography, Contact
 - `#/globe` — interactive 3D travel globe (drag to rotate, click pins)
+- `#/robotron` — **ROBO-RAID 2084**, an original Robotron-style twin-stick
+  arcade shooter built on the HTML5 Canvas. **WASD** to move, **Arrow keys**
+  to shoot in 8 directions, **P** to pause. Rescue the humans, survive the
+  waves; high score saves to your browser. (All original code/art — no
+  copyrighted assets. Lives in `src/game/robotron.js` + `src/pages/RobotronPage.jsx`.)

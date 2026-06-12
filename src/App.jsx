@@ -12,11 +12,16 @@ import Footer from './sections/Footer.jsx';
 // Lazy-loaded: globe.gl bundles three.js (~1.5 MB), so it only downloads
 // when the visitor actually opens the #/globe page.
 const GlobePage = lazy(() => import('./pages/GlobePage.jsx'));
+// Lazy-loaded too — keeps the game engine out of the main bundle.
+const RobotronPage = lazy(() => import('./pages/RobotronPage.jsx'));
 
-// Hash routing: "#/globe" -> globe page, anything else -> main page.
-// Plain section anchors like "#about" still work for in-page scrolling.
+// Hash routing: "#/globe" and "#/robotron" -> dedicated pages, anything
+// else -> main page. Plain section anchors like "#about" still scroll in-page.
 function getRoute() {
-  return window.location.hash.startsWith('#/globe') ? 'globe' : 'main';
+  const h = window.location.hash;
+  if (h.startsWith('#/globe')) return 'globe';
+  if (h.startsWith('#/robotron')) return 'robotron';
+  return 'main';
 }
 
 function MainPage() {
@@ -69,6 +74,16 @@ export default function App() {
           }
         >
           <GlobePage />
+        </Suspense>
+      ) : route === 'robotron' ? (
+        <Suspense
+          fallback={
+            <div className="globe-loading">
+              <span>BOOTING ARCADE CABINET...</span>
+            </div>
+          }
+        >
+          <RobotronPage />
         </Suspense>
       ) : (
         <MainPage />
