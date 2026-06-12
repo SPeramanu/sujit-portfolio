@@ -495,20 +495,6 @@ html.custom-cursor * {
   flex-wrap: wrap;
 }
 
-.hero-hud-left,
-.hero-hud-right {
-  position: absolute;
-  bottom: 90px;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 1.5px;
-  color: var(--text-dim);
-  line-height: 2;
-  z-index: 2;
-}
-.hero-hud-left { left: 36px; }
-.hero-hud-right { right: 36px; text-align: right; }
-
 .scroll-indicator {
   position: absolute;
   bottom: 26px;
@@ -1544,7 +1530,6 @@ kbd {
   .about-panel { position: static; }
   .modal-body { grid-template-columns: 1fr; }
   .modal-media { border-right: none; border-bottom: 1px solid var(--line); }
-  .hero-hud-left, .hero-hud-right { display: none; }
 }
 
 @media (max-width: 720px) {
