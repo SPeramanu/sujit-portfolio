@@ -34,17 +34,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="hero-hud-left" aria-hidden="true">
-        <div>LAT 43.6629°N</div>
-        <div>LNG 79.3957°W</div>
-        <div>UOFT // ENGSCI ROBOTICS</div>
-      </div>
-      <div className="hero-hud-right" aria-hidden="true">
-        <div>PWR ████████░░ 87%</div>
-        <div>SIG ██████████ 100%</div>
-        <div>MODE: AUTONOMOUS</div>
-      </div>
-
       <a href="#about" className="scroll-indicator" aria-label="Scroll to about">
         <span className="scroll-chevron">▼</span>
         <span className="scroll-text">SCROLL TO INITIATE</span>
