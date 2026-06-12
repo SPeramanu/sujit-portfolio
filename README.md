@@ -93,6 +93,11 @@ Until then the form shows a "not configured" notice with your email as fallback.
   - **GIRDER GAUNTLET** (barrel-climb, 1981 style) — A/D walk, W/S climb,
     SPACE jump. Sloped girders, ladder-hopping barrels, hammers, fireballs,
     bonus timer, rescue at the top.
+  - **MARE DESCENT** (gravity-lander, 1979 style) — ←/→ rotate, ↑/SPACE
+    thrust. Real thrust-and-gravity physics, procedural terrain every
+    sortie, dynamic camera zoom on descent, particle exhaust + landing
+    dust, beacon pads worth ×2/×3/×5, fuel bonuses, and mascon winds from
+    sortie 3. A nod to the lunar-rover work in my experience section.
 
   All three: **P** pause, **Enter** start, per-game high scores in
   localStorage, touch controls on mobile. Engines live in `src/game/`,

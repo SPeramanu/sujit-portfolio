@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { RobotronGame, VW, VH } from '../game/robotron.js';
 import { MuncherGame, W as MW, H as MH } from '../game/muncher.js';
 import { GirderGame, W as GW, H as GH } from '../game/girder.js';
+import { LanderGame, W as LW, H as LH } from '../game/lander.js';
 
 // ============================================================
-//  THE ARCADE — three original tribute cabinets, all built
+//  THE ARCADE — four original tribute cabinets, all built
 //  from scratch on the HTML5 Canvas (no copyrighted assets).
 //  Routes: #/arcade (menu) · #/arcade/<id> · #/robotron (legacy)
 // ============================================================
@@ -82,6 +83,31 @@ const GAMES = [
       { color: '#ff9fdc', label: 'RESCUE · +BONUS' },
     ],
     accent: '#ff5d73',
+  },
+  {
+    id: 'lander',
+    Engine: LanderGame,
+    w: LW,
+    h: LH,
+    title: 'MARE DESCENT',
+    year: 'GRAVITY-LANDER TRIBUTE · 1979',
+    desc: 'Procedural lunar terrain, real thrust-and-gravity physics, and three beacon pads. Kill your velocity, stay upright, watch the fuel — narrow pads pay 5×.',
+    stat: 'SORTIE',
+    touch: 'dpad-jump',
+    jumpLabel: 'THRUST',
+    controls: [
+      { keys: ['←', '→'], label: 'ROTATE' },
+      { keys: ['↑', 'SPACE'], label: 'THRUST' },
+      { keys: ['P'], label: 'PAUSE' },
+    ],
+    legend: [
+      { color: '#e8f6ff', label: 'LANDER' },
+      { color: '#7dffb0', label: 'PAD · ×2 / ×3 / ×5' },
+      { color: '#00f0ff', label: 'FUEL = BONUS' },
+      { color: '#ffb24a', label: 'WIND · SORTIE 3+' },
+      { color: '#ff5050', label: 'OUT OF ENVELOPE' },
+    ],
+    accent: '#7dffb0',
   },
 ];
 
@@ -265,7 +291,7 @@ function GameShell({ meta }) {
                 onTouchStart={() => gameRef.current?.setTouch('jump', true)}
                 onTouchEnd={() => gameRef.current?.setTouch('jump', false)}
               >
-                JUMP
+                {meta.jumpLabel || 'JUMP'}
               </button>
             </>
           )}
