@@ -12,15 +12,16 @@ import Footer from './sections/Footer.jsx';
 // Lazy-loaded: globe.gl bundles three.js (~1.5 MB), so it only downloads
 // when the visitor actually opens the #/globe page.
 const GlobePage = lazy(() => import('./pages/GlobePage.jsx'));
-// Lazy-loaded too — keeps the game engine out of the main bundle.
-const RobotronPage = lazy(() => import('./pages/RobotronPage.jsx'));
+// Lazy-loaded too — keeps the game engines out of the main bundle.
+const ArcadePage = lazy(() => import('./pages/ArcadePage.jsx'));
 
-// Hash routing: "#/globe" and "#/robotron" -> dedicated pages, anything
-// else -> main page. Plain section anchors like "#about" still scroll in-page.
+// Hash routing: "#/globe" and "#/arcade" -> dedicated pages, anything
+// else -> main page. Plain section anchors like "#about" still scroll
+// in-page. "#/robotron" is kept as a legacy alias for the arcade.
 function getRoute() {
   const h = window.location.hash;
   if (h.startsWith('#/globe')) return 'globe';
-  if (h.startsWith('#/robotron')) return 'robotron';
+  if (h.startsWith('#/arcade') || h.startsWith('#/robotron')) return 'arcade';
   return 'main';
 }
 
@@ -75,15 +76,15 @@ export default function App() {
         >
           <GlobePage />
         </Suspense>
-      ) : route === 'robotron' ? (
+      ) : route === 'arcade' ? (
         <Suspense
           fallback={
             <div className="globe-loading">
-              <span>BOOTING ARCADE CABINET...</span>
+              <span>BOOTING ARCADE CABINETS...</span>
             </div>
           }
         >
-          <RobotronPage />
+          <ArcadePage />
         </Suspense>
       ) : (
         <MainPage />

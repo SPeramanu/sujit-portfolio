@@ -7,7 +7,7 @@ const LINKS = [
   { href: '#photography', label: 'PHOTOGRAPHY' },
   { href: '#contact', label: 'CONTACT' },
   { href: '#/globe', label: 'GLOBE', special: true },
-  { href: '#/robotron', label: 'ARCADE', special: true },
+  { href: '#/arcade', label: 'ARCADE', special: true },
 ];
 
 export default function Navbar() {
