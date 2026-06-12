@@ -82,8 +82,19 @@ Until then the form shows a "not configured" notice with your email as fallback.
 
 - `/` — Hero, About, Experience, Projects, Photography, Contact
 - `#/globe` — interactive 3D travel globe (drag to rotate, click pins)
-- `#/robotron` — **ROBO-RAID 2084**, an original Robotron-style twin-stick
-  arcade shooter built on the HTML5 Canvas. **WASD** to move, **Arrow keys**
-  to shoot in 8 directions, **P** to pause. Rescue the humans, survive the
-  waves; high score saves to your browser. (All original code/art — no
-  copyrighted assets. Lives in `src/game/robotron.js` + `src/pages/RobotronPage.jsx`.)
+- `#/arcade` — **THE ARCADE**: three original tribute cabinets built from
+  scratch on the HTML5 Canvas (all original code, art, maze layouts, and
+  level geometry — no copyrighted assets, so it's safe to publish):
+  - **ROBO-RAID 2084** (twin-stick, 1982 style) — WASD move, arrows shoot.
+    Rescue humans, survive waves; hulks are indestructible.
+  - **MUNCH PROTOCOL** (maze-chase, 1980 style) — arrows/WASD steer. Four
+    ghost AI personalities (pursuer/ambusher/flanker/wanderer), scatter–chase
+    cycles, energizers, wrap-around tunnel, bonus fruit.
+  - **GIRDER GAUNTLET** (barrel-climb, 1981 style) — A/D walk, W/S climb,
+    SPACE jump. Sloped girders, ladder-hopping barrels, hammers, fireballs,
+    bonus timer, rescue at the top.
+
+  All three: **P** pause, **Enter** start, per-game high scores in
+  localStorage, touch controls on mobile. Engines live in `src/game/`,
+  the cabinet hub in `src/pages/ArcadePage.jsx`. (`#/robotron` still works
+  as a legacy link to ROBO-RAID.)

@@ -1306,6 +1306,7 @@ html.custom-cursor * {
   position: relative;
   aspect-ratio: 900 / 680;
   width: 100%;
+  margin: 0 auto;
   overflow: hidden;
   background: #04070d;
 }
@@ -1416,6 +1417,89 @@ kbd {
   background: transparent;
   border: 1.5px solid var(--cyan);
   transform: rotate(45deg);
+}
+
+/* ---------- arcade cabinet menu ---------- */
+.arcade-menu {
+  max-width: 960px;
+  margin: 12px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.cabinet-card {
+  --cab-accent: var(--cyan);
+  text-align: left;
+  padding: 26px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.cabinet-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--cab-accent);
+  box-shadow: 0 14px 40px rgba(0, 240, 255, 0.14);
+}
+
+.cabinet-marquee {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 0 16px var(--cab-accent);
+}
+.cabinet-year {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--amber);
+}
+.cabinet-desc {
+  font-size: 15px;
+  color: var(--text-dim);
+  flex: 1;
+}
+.cabinet-legend {
+  display: flex;
+  gap: 8px;
+}
+.cabinet-legend .dot {
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+}
+.cabinet-coin {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--cab-accent);
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+.cabinet-card:hover .cabinet-coin {
+  opacity: 1;
+  animation: blink 0.7s steps(1) infinite;
+}
+
+.jump-btn {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 2px solid var(--amber);
+  background: rgba(255, 159, 28, 0.1);
+  color: var(--amber);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 2px;
+  align-self: center;
+  touch-action: none;
+  user-select: none;
+}
+.jump-btn:active {
+  background: rgba(255, 159, 28, 0.3);
 }
 
 .touch-controls {
