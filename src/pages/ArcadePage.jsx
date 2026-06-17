@@ -149,15 +149,24 @@ function LorenzBackground() {
     let cx = 0;
     let cy = 0;
 
+    // Model-space half-extents of the attractor, used to fit it to the canvas.
+    // Horizontal: |x·cos − y·sin| peaks near ~28. Vertical: z spans ~[2, 48],
+    // so it's centred on z ≈ 25 with a half-height of ~24.
+    const HALF_W = 28;
+    const HALF_H = 24;
+    const Z_CENTER = 25;
+
     const resize = () => {
-          // Canvas is absolutely positioned and fills (+bleeds past) the stage,
-          // so measure its own rendered box.
+          // Canvas is absolutely positioned and fills the stage, so measure its
+          // own rendered box.
           w = canvas.clientWidth * dpr;
           h = canvas.clientHeight * dpr;
           canvas.width = w;
           canvas.height = h;
-          scale = Math.min(w, h) / 25;  // ← was /60; lower = bigger attractor
-          cx = w / 2.2;
+          // Fit the attractor's bounding box to the canvas (the smaller axis
+          // wins so nothing important clips); the radial mask fades the edges.
+          scale = Math.min(w / 2 / HALF_W, h / 2 / HALF_H);
+          cx = w / 2;   // truly centred — the x/y lobes are symmetric about 0
           cy = h / 2;
           tracers.forEach((p) => {
             p.px = null;
@@ -177,7 +186,7 @@ function LorenzBackground() {
 
     const project = (p, cos, sin) => {
       const rx = p.x * cos - p.y * sin;
-      return [cx + rx * scale, cy - (p.z - 25) * scale];
+      return [cx + rx * scale, cy - (p.z - Z_CENTER) * scale];
     };
 
     const drawSegments = (substeps, cos, sin) => {

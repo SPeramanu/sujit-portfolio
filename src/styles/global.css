@@ -518,6 +518,241 @@ html.custom-cursor * {
   50% { transform: translateY(6px); }
 }
 
+/* ---------- hero music player ---------- */
+.music-player {
+  --track-accent: var(--cyan);
+  position: absolute;
+  left: 28px;
+  bottom: 28px;
+  z-index: 4;
+  width: 320px;
+  padding: 14px 16px 16px;
+  background: rgba(6, 11, 20, 0.82);
+  backdrop-filter: blur(10px);
+  transition: width 0.25s, padding 0.25s;
+}
+.music-player.collapsed { width: 230px; padding-bottom: 12px; }
+.music-player.collapsed .mp-body,
+.music-player.collapsed .mp-scrub,
+.music-player.collapsed .mp-controls { display: none; }
+
+.mp-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 2px;
+}
+.mp-now {
+  color: var(--track-accent);
+  text-shadow: 0 0 8px var(--track-accent);
+}
+.mp-count { color: var(--text-dim); }
+.mp-count i { color: var(--text-dim); opacity: 0.5; font-style: normal; margin: 0 2px; }
+.mp-collapse {
+  margin-left: auto;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1;
+  width: 18px;
+  height: 18px;
+  transition: color 0.2s;
+}
+.mp-collapse:hover { color: var(--cyan); }
+
+.mp-body {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin: 13px 0 11px;
+}
+
+/* spinning vinyl record */
+.mp-vinyl {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, #05080f 0 2px, #0d1422 2px 3px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 4px 12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mp-vinyl::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.18), transparent 45%);
+}
+.mp-vinyl.spin { animation: vinyl-spin 4s linear infinite; }
+@keyframes vinyl-spin { to { transform: rotate(360deg); } }
+.mp-vinyl-label {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--track-accent);
+  box-shadow: 0 0 10px var(--track-accent);
+  position: relative;
+  z-index: 1;
+}
+.mp-vinyl-label::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: #05080f;
+}
+/* equalizer overlay while playing */
+.mp-eq {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  z-index: 2;
+}
+.mp-eq i {
+  width: 2.5px;
+  height: 8px;
+  background: var(--track-accent);
+  box-shadow: 0 0 6px var(--track-accent);
+  animation: eq 0.8s ease-in-out infinite;
+}
+.mp-eq i:nth-child(2) { animation-delay: 0.18s; }
+.mp-eq i:nth-child(3) { animation-delay: 0.36s; }
+.mp-eq i:nth-child(4) { animation-delay: 0.54s; }
+@keyframes eq {
+  0%, 100% { height: 5px; }
+  50% { height: 17px; }
+}
+
+.mp-meta { min-width: 0; flex: 1; }
+.mp-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mp-artist {
+  font-size: 13px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mp-hint {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.5px;
+  color: var(--amber);
+  line-height: 1.4;
+  white-space: normal;
+  word-break: break-all;
+}
+
+.mp-scrub {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 10px;
+}
+.mp-time {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  width: 30px;
+  text-align: center;
+}
+
+/* range inputs (seek + volume) share a track-fill style via --pct */
+.mp-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--track-accent) 0%,
+    var(--track-accent) var(--pct, 0%),
+    rgba(255, 255, 255, 0.14) var(--pct, 0%),
+    rgba(255, 255, 255, 0.14) 100%
+  );
+  cursor: pointer;
+  outline: none;
+}
+.mp-seek { flex: 1; }
+.mp-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px var(--track-accent);
+  transition: transform 0.15s;
+}
+.mp-range:hover::-webkit-slider-thumb { transform: scale(1.25); }
+.mp-range::-moz-range-thumb {
+  width: 11px;
+  height: 11px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px var(--track-accent);
+}
+
+.mp-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mp-controls > button {
+  color: var(--text);
+  font-size: 14px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.2s, background 0.2s, transform 0.15s;
+}
+.mp-controls > button:hover { color: var(--track-accent); transform: scale(1.12); }
+.mp-controls > button:active { transform: scale(0.95); }
+.mp-play {
+  background: var(--track-accent) !important;
+  color: #05080f !important;
+  font-size: 12px !important;
+  box-shadow: 0 0 14px var(--track-accent);
+}
+.mp-play:hover { color: #05080f !important; filter: brightness(1.1); }
+
+.mp-vol {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+.mp-mute {
+  font-size: 13px;
+  width: 22px;
+  height: 26px;
+  filter: grayscale(0.3);
+}
+.mp-volume { width: 64px; }
+
 /* ---------- glitch text ---------- */
 .glitch {
   position: relative;
@@ -1560,6 +1795,16 @@ kbd {
 
   .robotron-scoreboard { grid-template-columns: repeat(2, 1fr); }
   .control-legend { gap: 14px; }
+
+  /* music player: span the bottom, drop the scroll cue out of the way */
+  .music-player {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+  }
+  .music-player.collapsed { width: auto; }
+  .hero .scroll-indicator { display: none; }
 }
 
 /* respect users who prefer less motion */
@@ -1568,6 +1813,8 @@ kbd {
   .reveal { opacity: 1; transform: none; transition: none; }
   .glitch::before, .glitch::after { animation: none; opacity: 0; }
   .node-ring, .scroll-chevron { animation: none; }
+  .mp-vinyl.spin { animation: none; }
+  .mp-eq i { animation: none; height: 9px; }
 }
 /* ============================================================
    Cabinet select → 2×2 grid
@@ -1608,11 +1855,12 @@ kbd {
   position: absolute;
   inset: 0;                 /* fills the stage exactly — nothing sticks out to be clipped */
   z-index: 0;
-  opacity: 0.6;
+  opacity: 0.55;
   pointer-events: none;
-  /* bigger, gentler fade so the bottom lobe survives */
-  -webkit-mask-image: radial-gradient(95% 95% at 50% 50%, #000 72%, transparent 100%);
-          mask-image: radial-gradient(95% 95% at 50% 50%, #000 72%, transparent 100%);
+  /* Soft elliptical vignette centred on the attractor: solid through the core,
+     fading well before the edges so the backdrop melts into the page. */
+  -webkit-mask-image: radial-gradient(75% 80% at 50% 50%, #000 40%, transparent 100%);
+          mask-image: radial-gradient(75% 80% at 50% 50%, #000 40%, transparent 100%);
 }
  
 /* Cards float centered above the attractor. */
