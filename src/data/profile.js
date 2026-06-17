@@ -40,9 +40,9 @@ export const profile = {
   // Quick-read stats shown in the about HUD panel.
   stats: [
     { label: 'DEGREE', value: 'BASc EngSci Robotics, UofT ’26' },
+    { label: 'MINOR', value: 'Artificial Intelligence Engineering' },
     { label: 'FOCUS', value: 'Surgical Robotics / Space Systems' },
-    { label: 'BASE', value: 'Toronto, ON' },
-    { label: 'STATUS', value: 'Open to opportunities' },
+    { label: 'LOCATION', value: 'Toronto, ON' },
   ],
 
   // Skill groups render as tag chips.

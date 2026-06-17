@@ -12,7 +12,7 @@ export default function Hero() {
       <div className="hero-grid-overlay" aria-hidden="true" />
 
       <div className="hero-content">
-        <div className="hero-pretitle">// SYSTEM ONLINE — OPERATOR IDENTIFIED</div>
+        <div className="hero-pretitle">ENGINEERING SCIENCE AT THE UNIVERSITY OF TORONTO</div>
         <h1 className="hero-name">
           <GlitchText text={profile.name} />
         </h1>
@@ -29,14 +29,14 @@ export default function Hero() {
             VIEW PROJECTS
           </a>
           <a href="#contact" className="btn btn-ghost">
-            ESTABLISH CONTACT
+            CONTACT
           </a>
         </div>
       </div>
 
       <a href="#about" className="scroll-indicator" aria-label="Scroll to about">
         <span className="scroll-chevron">▼</span>
-        <span className="scroll-text">SCROLL TO INITIATE</span>
+        <span className="scroll-text">SCROLL</span>
       </a>
     </section>
   );

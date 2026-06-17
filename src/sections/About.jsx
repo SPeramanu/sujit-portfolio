@@ -25,14 +25,11 @@ export default function About() {
         </div>
 
         <aside className="about-panel hud-frame">
-          <div className="panel-title">// OPERATOR PROFILE</div>
+          <div className="panel-title">PROFILE</div>
           {/* Drop a portrait at /public/assets/photos/portrait.jpg and swap
               this placeholder div for:
               <img src="assets/photos/portrait.jpg" alt="Sujit Peramanu" /> */}
-          <div className="portrait-placeholder" data-interactive>
-            <span>[ PORTRAIT ]</span>
-            <span className="portrait-hint">assets/photos/portrait.jpg</span>
-          </div>
+          <img src="assets/photos/portrait.jpg" alt="Sujit Peramanu" />
           <dl className="stat-list">
             {profile.stats.map((s) => (
               <div key={s.label} className="stat-row">
