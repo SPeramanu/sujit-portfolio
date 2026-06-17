@@ -1,5 +1,6 @@
 import ParticleCanvas from '../components/ParticleCanvas.jsx';
 import GlitchText from '../components/GlitchText.jsx';
+import MusicPlayer from '../components/MusicPlayer.jsx';
 import useTypewriter from '../hooks/useTypewriter.js';
 import { profile } from '../data/profile.js';
 
@@ -33,6 +34,8 @@ export default function Hero() {
           </a>
         </div>
       </div>
+
+      <MusicPlayer />
 
       <a href="#about" className="scroll-indicator" aria-label="Scroll to about">
         <span className="scroll-chevron">▼</span>
