@@ -1569,3 +1569,55 @@ kbd {
   .glitch::before, .glitch::after { animation: none; opacity: 0; }
   .node-ring, .scroll-chevron { animation: none; }
 }
+/* ============================================================
+   Cabinet select → 2×2 grid
+   (Merge into your existing .arcade-menu rule if you have one;
+    the --grid modifier guarantees the 2×2 layout.)
+   ============================================================ */
+.arcade-menu--grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  max-width: 920px;
+  margin-inline: auto;
+}
+ 
+@media (max-width: 640px) {
+  .arcade-menu--grid {
+    grid-template-columns: 1fr;
+  }
+}
+ 
+/* ============================================================
+   Lorenz attractor backdrop
+   ============================================================ */
+.arcade-stage {
+  position: relative;
+  isolation: isolate;
+  max-width: 1100px;
+  min-height: 820px;        /* ← this now sizes the canvas; raise it for a taller attractor */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+ 
+.lorenz-bg {
+  position: absolute;
+  inset: 0;                 /* fills the stage exactly — nothing sticks out to be clipped */
+  z-index: 0;
+  opacity: 0.6;
+  pointer-events: none;
+  /* bigger, gentler fade so the bottom lobe survives */
+  -webkit-mask-image: radial-gradient(95% 95% at 50% 50%, #000 72%, transparent 100%);
+          mask-image: radial-gradient(95% 95% at 50% 50%, #000 72%, transparent 100%);
+}
+ 
+/* Cards float centered above the attractor. */
+.arcade-stage > .arcade-menu {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}

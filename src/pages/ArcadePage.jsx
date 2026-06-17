@@ -111,6 +111,128 @@ const GAMES = [
   },
 ];
 
+// ============================================================
+//  Lorenz strange attractor — drifts behind the cabinet select.
+//  Pure canvas: a handful of tracers integrate the classic
+//  system (σ=10, ρ=28, β=8/3) and leave glowing trails in the
+//  arcade palette. The view rotates slowly for a 3D feel.
+//  Honors prefers-reduced-motion with a single static render.
+// ============================================================
+function LorenzBackground() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d'); // alpha defaults to true → transparent
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const SIGMA = 10;
+    const RHO = 28;
+    const BETA = 8 / 3;
+    const DT = 0.005;
+    const PALETTE = ['#00f0ff', '#ff3cf0', '#ffd24a', '#7dffb0', '#ff5d73'];
+
+    const tracers = PALETTE.map((color, i) => ({
+      x: 0.1 + i * 0.03,
+      y: 0,
+      z: 18 + i * 0.7,
+      color,
+      px: null,
+      py: null,
+    }));
+
+    let angle = 0;
+    let w = 0;
+    let h = 0;
+    let scale = 1;
+    let cx = 0;
+    let cy = 0;
+
+    const resize = () => {
+          // Canvas is absolutely positioned and fills (+bleeds past) the stage,
+          // so measure its own rendered box.
+          w = canvas.clientWidth * dpr;
+          h = canvas.clientHeight * dpr;
+          canvas.width = w;
+          canvas.height = h;
+          scale = Math.min(w, h) / 25;  // ← was /60; lower = bigger attractor
+          cx = w / 2.2;
+          cy = h / 2;
+          tracers.forEach((p) => {
+            p.px = null;
+            p.py = null;
+          });
+          ctx.clearRect(0, 0, w, h);
+        };
+
+    const step = (p) => {
+      const dx = SIGMA * (p.y - p.x);
+      const dy = p.x * (RHO - p.z) - p.y;
+      const dz = p.x * p.y - BETA * p.z;
+      p.x += dx * DT;
+      p.y += dy * DT;
+      p.z += dz * DT;
+    };
+
+    const project = (p, cos, sin) => {
+      const rx = p.x * cos - p.y * sin;
+      return [cx + rx * scale, cy - (p.z - 25) * scale];
+    };
+
+    const drawSegments = (substeps, cos, sin) => {
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.lineWidth = 1.1 * dpr;
+      for (const p of tracers) {
+        ctx.strokeStyle = p.color;
+        ctx.beginPath();
+        for (let s = 0; s < substeps; s++) {
+          step(p);
+          const [sx, sy] = project(p, cos, sin);
+          if (p.px !== null) {
+            ctx.moveTo(p.px, p.py);
+            ctx.lineTo(sx, sy);
+          }
+          p.px = sx;
+          p.py = sy;
+        }
+        ctx.stroke();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    if (reduce) {
+      drawSegments(4000, Math.cos(0.5), Math.sin(0.5));
+      return () => window.removeEventListener('resize', resize);
+    }
+
+    let raf;
+    const frame = () => {
+      // Fade old trails toward TRANSPARENT by subtracting alpha — keeps the
+      // page background visible instead of building up an opaque black box.
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      ctx.fillRect(0, 0, w, h);
+      ctx.globalCompositeOperation = 'source-over';
+
+      angle += 0.0011;
+      drawSegments(6, Math.cos(angle), Math.sin(angle));
+      raf = requestAnimationFrame(frame);
+    };
+    frame();
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="lorenz-bg" aria-hidden="true" />;
+}
+
 // On-screen touch stick (phones/tablets); reports a unit vector or null.
 function TouchStick({ label, onVec }) {
   const ref = useRef(null);
@@ -343,7 +465,7 @@ export default function ArcadePage() {
           <p>
             {meta
               ? `// ${meta.year}`
-              : '// THREE ORIGINAL TRIBUTE CABINETS — ALL CODE & PIXELS FROM SCRATCH'}
+              : '// FOUR ORIGINAL TRIBUTE CABINETS — ALL CODE & PIXELS FROM SCRATCH'}
           </p>
         </div>
       </header>
@@ -351,32 +473,35 @@ export default function ArcadePage() {
       {meta ? (
         <GameShell key={meta.id} meta={meta} />
       ) : (
-        <div className="arcade-menu">
-          {GAMES.map((gm) => (
-            <button
-              key={gm.id}
-              className="cabinet-card hud-frame"
-              style={{ '--cab-accent': gm.accent }}
-              onClick={() => {
-                window.location.hash = `#/arcade/${gm.id}`;
-              }}
-            >
-              <div className="cabinet-marquee">{gm.title}</div>
-              <div className="cabinet-year">{gm.year}</div>
-              <p className="cabinet-desc">{gm.desc}</p>
-              <div className="cabinet-legend">
-                {gm.legend.slice(0, 4).map((l) => (
-                  <i
-                    key={l.label}
-                    className="dot"
-                    title={l.label}
-                    style={{ background: l.color, boxShadow: `0 0 6px ${l.color}` }}
-                  />
-                ))}
-              </div>
-              <span className="cabinet-coin">INSERT COIN ►</span>
-            </button>
-          ))}
+        <div className="arcade-stage">
+          <LorenzBackground />
+          <div className="arcade-menu arcade-menu--grid">
+            {GAMES.map((gm) => (
+              <button
+                key={gm.id}
+                className="cabinet-card hud-frame"
+                style={{ '--cab-accent': gm.accent }}
+                onClick={() => {
+                  window.location.hash = `#/arcade/${gm.id}`;
+                }}
+              >
+                <div className="cabinet-marquee">{gm.title}</div>
+                <div className="cabinet-year">{gm.year}</div>
+                <p className="cabinet-desc">{gm.desc}</p>
+                <div className="cabinet-legend">
+                  {gm.legend.slice(0, 4).map((l) => (
+                    <i
+                      key={l.label}
+                      className="dot"
+                      title={l.label}
+                      style={{ background: l.color, boxShadow: `0 0 6px ${l.color}` }}
+                    />
+                  ))}
+                </div>
+                <span className="cabinet-coin">INSERT COIN ►</span>
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>
