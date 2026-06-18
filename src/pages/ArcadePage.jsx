@@ -149,24 +149,29 @@ function LorenzBackground() {
     let cx = 0;
     let cy = 0;
 
-    // Model-space half-extents of the attractor, used to fit it to the canvas.
-    // Horizontal: |x·cos − y·sin| peaks near ~28. Vertical: z spans ~[2, 48],
-    // so it's centred on z ≈ 25 with a half-height of ~24.
-    const HALF_W = 28;
+    // Attractor bounds in model space, used to fit the whole butterfly to the
+    // canvas. Horizontal: |x·cos − y·sin| spans ~±23. Vertical: z spans ~[1, 48],
+    // so it's centred on ~24 with a half-height of ~24.
+    const HALF_W = 23;
     const HALF_H = 24;
-    const Z_CENTER = 25;
+    const Z_CENTER = 24;
+    const FILL = 1.12; // >1 → fills the box; tips bleed gently into the soft mask
 
     const resize = () => {
-          // Canvas is absolutely positioned and fills the stage, so measure its
-          // own rendered box.
-          w = canvas.clientWidth * dpr;
-          h = canvas.clientHeight * dpr;
+          // Measure the canvas's real rendered box. Using getBoundingClientRect
+          // (driven by a ResizeObserver) means we always pick up the stage's
+          // final size, even when layout/fonts settle after the first paint —
+          // the old one-shot clientWidth read fired too early and stuck tiny.
+          const rect = canvas.getBoundingClientRect();
+          if (rect.width === 0 || rect.height === 0) return; // not laid out yet
+          w = Math.round(rect.width * dpr);
+          h = Math.round(rect.height * dpr);
           canvas.width = w;
           canvas.height = h;
-          // Fit the attractor's bounding box to the canvas (the smaller axis
-          // wins so nothing important clips); the radial mask fades the edges.
-          scale = Math.min(w / 2 / HALF_W, h / 2 / HALF_H);
-          cx = w / 2;   // truly centred — the x/y lobes are symmetric about 0
+          // Fit the whole butterfly to the box; the smaller axis wins so nothing
+          // important clips, then FILL scales it up to fill the backdrop.
+          scale = Math.min(w / (2 * HALF_W), h / (2 * HALF_H)) * FILL;
+          cx = w / 2; // centred behind the cabinet cards
           cy = h / 2;
           tracers.forEach((p) => {
             p.px = null;
@@ -210,13 +215,31 @@ function LorenzBackground() {
       ctx.globalCompositeOperation = 'source-over';
     };
 
-    resize();
-    window.addEventListener('resize', resize);
-
     if (reduce) {
-      drawSegments(4000, Math.cos(0.5), Math.sin(0.5));
-      return () => window.removeEventListener('resize', resize);
+      // Static render: re-fit and redraw on every size change (resize() clears
+      // the canvas, so the draw has to follow it each time).
+      const renderStatic = () => {
+        resize();
+        if (w && h) drawSegments(4000, Math.cos(0.5), Math.sin(0.5));
+      };
+      renderStatic();
+      const ro = new ResizeObserver(renderStatic);
+      ro.observe(canvas);
+      window.addEventListener('resize', renderStatic);
+      return () => {
+        ro.disconnect();
+        window.removeEventListener('resize', renderStatic);
+      };
     }
+
+    resize();
+    // ResizeObserver catches the stage growing to its full height after the
+    // initial paint (the real cause of the tiny, top-left render); the window
+    // listener covers viewport changes. The animation loop keeps redrawing, so
+    // it just needs the box re-fitted.
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+    window.addEventListener('resize', resize);
 
     let raf;
     const frame = () => {
@@ -235,6 +258,7 @@ function LorenzBackground() {
 
     return () => {
       cancelAnimationFrame(raf);
+      ro.disconnect();
       window.removeEventListener('resize', resize);
     };
   }, []);
