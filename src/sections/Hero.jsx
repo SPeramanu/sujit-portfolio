@@ -22,8 +22,7 @@ export default function Hero() {
           <span className="type-cursor">█</span>
         </div>
         <p className="hero-blurb">
-          Building robots that see, learn, and act — from lunar rovers to
-          surgical manipulators.
+          My goal is to build robots that see, learn, and act for the benifit of the space and medical community.
         </p>
         <div className="hero-cta">
           <a href="#projects" className="btn btn-primary">

@@ -22,14 +22,17 @@ export const profile = {
   // ---- ABOUT section ----
   // Each string renders as a paragraph. Write whatever you want here.
   about: [
-    `I'm an Engineering Science student at the University of Toronto, majoring in
-     Robotics with a minor in Artificial Intelligence. I build machines that see,
+    `I recently graduated from Engineering Science at the University of Toronto, majoring in
+     Robotics with a minor in Artificial Intelligence. I believe we are at a precipus where 
+     robotics and physical AI has the capacity to fundamentally improve our lives through two
+     primary entrypoints: medicine and space. I have dedicated my time contributing to both 
+     of these spaces in both industry and reseach. Ultimately, I have sought to build machines that see,
      decide, and act — from imitation-learning policies that perform surgical
      grasping under OCT guidance, to mission software that drives rovers on the Moon.`,
 
-    `My path has taken me through lunar mission control rooms in Ottawa, satellite
-     test facilities in Munich, and operating-room robotics labs in Toronto. The
-     common thread: I love the full stack of robotics — perception, control,
+    `My road has taken me through lunar mission control rooms in Ottawa, satellite
+     test facilities in Munich, and surgical robotics labs in Toronto. 
+     My I love the full stack of robotics — perception, control,
      embedded firmware, and the software infrastructure that ties it all together.`,
 
     `Off the clock you'll find me behind a camera lens or planning the next trip.
