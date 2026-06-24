@@ -7,9 +7,9 @@ export default function Photography() {
   const [lightboxIdx, setLightboxIdx] = useState(null);
 
   return (
-    <Section id="photography" index="04" title="OPTICAL SENSOR ARCHIVE">
+    <Section id="photography" index="04" title="Photography">
       <p className="section-lede">
-        Shots from wherever the work takes me. Click any frame to inspect.
+        Frames from wherever the work takes me. Click any photo to enlarge.
       </p>
       <div className="masonry">
         {photos.map((photo, i) => (

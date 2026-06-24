@@ -11,7 +11,7 @@ function TimelineEntry({ entry, idx }) {
       </div>
       <article className="timeline-card hud-frame">
         <div className="timeline-card-head">
-          <span className="entry-index">LOG {String(idx + 1).padStart(2, '0')}</span>
+          <span className="entry-index">{String(idx + 1).padStart(2, '0')}</span>
           <span className="entry-dates">{entry.dates}</span>
         </div>
         <h3>{entry.role}</h3>
@@ -35,7 +35,7 @@ function TimelineEntry({ entry, idx }) {
 
 export default function Experience() {
   return (
-    <Section id="experience" index="02" title="MISSION LOG">
+    <Section id="experience" index="02" title="Experience">
       <ol className="timeline">
         {experience.map((e, i) => (
           <TimelineEntry key={e.company + e.dates} entry={e} idx={i} />

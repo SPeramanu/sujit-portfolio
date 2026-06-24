@@ -15,6 +15,13 @@ const fmt = (s) => {
 export default function MusicPlayer() {
   const audioRef = useRef(null);
   const seekingRef = useRef(false);
+  const rootRef = useRef(null);
+  const drag = useRef({ active: false, offX: 0, offY: 0 });
+
+  // null until the player is first dragged; afterwards a fixed {x,y} in
+  // viewport coords (the element is position:fixed, so it stays put while the
+  // page scrolls and can be dropped anywhere on screen).
+  const [pos, setPos] = useState(null);
 
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -77,8 +84,38 @@ export default function MusicPlayer() {
     if (a && Number.isFinite(a.duration)) a.currentTime = v;
   };
 
+  // ---- drag (by the header) -------------------------------------------------
+  const onDragStart = (e) => {
+    if (e.target.closest('.mp-collapse')) return; // let the collapse button work
+    const rect = rootRef.current.getBoundingClientRect();
+    drag.current = { active: true, offX: e.clientX - rect.left, offY: e.clientY - rect.top };
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+    e.preventDefault();
+  };
+  const onDragMove = (e) => {
+    if (!drag.current.active) return;
+    const rect = rootRef.current.getBoundingClientRect();
+    const maxX = window.innerWidth - rect.width - 8;
+    const maxY = window.innerHeight - rect.height - 8;
+    const x = Math.max(8, Math.min(maxX, e.clientX - drag.current.offX));
+    const y = Math.max(8, Math.min(maxY, e.clientY - drag.current.offY));
+    setPos({ x, y });
+  };
+  const onDragEnd = (e) => {
+    drag.current.active = false;
+    e.currentTarget.releasePointerCapture?.(e.pointerId);
+  };
+
+  const posStyle = pos
+    ? { left: `${pos.x}px`, top: `${pos.y}px`, right: 'auto', bottom: 'auto' }
+    : null;
+
   return (
-    <div className={`music-player hud-frame ${collapsed ? 'collapsed' : ''}`} style={{ '--track-accent': track.accent }}>
+    <div
+      ref={rootRef}
+      className={`music-player hud-frame ${collapsed ? 'collapsed' : ''}`}
+      style={{ '--track-accent': track.accent, ...posStyle }}
+    >
       <audio
         ref={audioRef}
         src={track.src}
@@ -93,7 +130,14 @@ export default function MusicPlayer() {
         onPause={() => setPlaying(false)}
       />
 
-      <div className="mp-head">
+      <div
+        className="mp-head"
+        onPointerDown={onDragStart}
+        onPointerMove={onDragMove}
+        onPointerUp={onDragEnd}
+        onPointerCancel={onDragEnd}
+      >
+        <span className="mp-drag-grip" aria-hidden="true">⠿</span>
         <span className="mp-now">{playing ? 'NOW PLAYING' : 'PAUSED'}</span>
         <span className="mp-count">
           {String(index + 1).padStart(2, '0')}<i>/</i>{String(playlist.length).padStart(2, '0')}

@@ -6,10 +6,10 @@ export default function Footer() {
       <div className="footer-line" aria-hidden="true" />
       <div className="footer-content">
         <span>
-          © {new Date().getFullYear()} {profile.name} // ALL SYSTEMS NOMINAL
+          © {new Date().getFullYear()} {profile.name}
         </span>
         <span className="footer-meta">
-          DESIGNED & BUILT BY SUJIT PERAMANU · REACT + VITE
+          Designed &amp; built by Sujit Peramanu · React + Vite
         </span>
       </div>
     </footer>

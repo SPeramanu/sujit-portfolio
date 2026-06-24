@@ -4,7 +4,7 @@
 // ============================================================
 
 export const profile = {
-  name: 'SUJIT PERAMANU',
+  name: 'Sujit Peramanu',
   // Taglines cycle in the hero with a typewriter effect — add/remove freely.
   taglines: [
     'ROBOTICS ENGINEER',
@@ -23,16 +23,16 @@ export const profile = {
   // Each string renders as a paragraph. Write whatever you want here.
   about: [
     `I recently graduated from Engineering Science at the University of Toronto, majoring in
-     Robotics with a minor in Artificial Intelligence. I believe we are at a precipus where 
-     robotics and physical AI has the capacity to fundamentally improve our lives through two
-     primary entrypoints: medicine and space. I have dedicated my time contributing to both 
-     of these spaces in both industry and reseach. Ultimately, I have sought to build machines that see,
+     Robotics with a minor in Artificial Intelligence. I believe we are at a precipice where
+     robotics and physical AI have the capacity to fundamentally improve our lives through two
+     primary entry points: medicine and space. I have dedicated my time to both of these areas,
+     in industry and in research. Ultimately, I have sought to build machines that see,
      decide, and act — from imitation-learning policies that perform surgical
      grasping under OCT guidance, to mission software that drives rovers on the Moon.`,
 
     `My road has taken me through lunar mission control rooms in Ottawa, satellite
-     test facilities in Munich, and surgical robotics labs in Toronto. 
-     My I love the full stack of robotics — perception, control,
+     test facilities in Munich, and surgical robotics labs in Toronto.
+     I love the full stack of robotics — perception, control,
      embedded firmware, and the software infrastructure that ties it all together.`,
 
     `Off the clock you'll find me behind a camera lens or planning the next trip.

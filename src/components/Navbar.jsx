@@ -23,8 +23,7 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <a className="nav-logo" href="#hero" onClick={() => setOpen(false)}>
-        <span className="logo-bracket">[</span>SP<span className="logo-cursor">_</span>
-        <span className="logo-bracket">]</span>
+        Sujit Peramanu<span className="logo-bracket">.</span>
       </a>
       <button
         className={`nav-toggle ${open ? 'open' : ''}`}

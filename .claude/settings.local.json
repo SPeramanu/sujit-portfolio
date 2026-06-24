@@ -12,7 +12,12 @@
       "PowerShell($env:Path = [Environment]::GetEnvironmentVariable\\('Path','Machine'\\) + ';' + [Environment]::GetEnvironmentVariable\\('Path','User'\\); cd \"c:\\\\Users\\\\Sumed\\\\Downloads\\\\Sujit\\\\sujit-portfolio\"; git config --global user.email \"sujitp2003@gmail.com\"; git config --global user.name \"Sujit Peramanu\"; git commit -m \"Initial portfolio — Vite+React HUD-themed site with globe page\")",
       "PowerShell(Remove-Item \"c:\\\\Users\\\\Sumed\\\\Downloads\\\\Sujit\\\\sujit-portfolio\\\\src\\\\pages\\\\RobotronPage.jsx\" -Confirm:$false)",
       "PowerShell($env:Path = [Environment]::GetEnvironmentVariable\\('Path','Machine'\\) + ';' + [Environment]::GetEnvironmentVariable\\('Path','User'\\); cd \"c:\\\\Users\\\\Sumed\\\\Downloads\\\\Sujit\\\\sujit-portfolio\"; npm run build 2>&1 | Select-Object -Last 8)",
-      "PowerShell($env:Path = [Environment]::GetEnvironmentVariable\\('Path','Machine'\\) + ';' + [Environment]::GetEnvironmentVariable\\('Path','User'\\); cd \"c:\\\\Users\\\\Sumed\\\\Downloads\\\\Sujit\\\\sujit-portfolio\"; git commit -F _commitmsg.txt; Remove-Item _commitmsg.txt)"
+      "PowerShell($env:Path = [Environment]::GetEnvironmentVariable\\('Path','Machine'\\) + ';' + [Environment]::GetEnvironmentVariable\\('Path','User'\\); cd \"c:\\\\Users\\\\Sumed\\\\Downloads\\\\Sujit\\\\sujit-portfolio\"; git commit -F _commitmsg.txt; Remove-Item _commitmsg.txt)",
+      "Bash(pwd -W)",
+      "Bash(node scripts/shot.mjs \"http://localhost:4317/\" \"$\\(pwd -W\\)/shots/page-main.png\" 2200)",
+      "Bash(node scripts/shot.mjs \"http://localhost:4317/\" \"$\\(pwd -W\\)/shots/d-main.png\" 2200 1440 900)",
+      "Bash(node scripts/shot.mjs \"http://localhost:4317/#/arcade\" \"$\\(pwd -W\\)/shots/d-arcade.png\" 3000 1440 900)",
+      "Bash(node scripts/shot.mjs \"http://localhost:4317/#/globe\" \"$\\(pwd -W\\)/shots/d-globe.png\" 5000 1440 900)"
     ]
   }
 }
