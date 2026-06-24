@@ -37,59 +37,59 @@ export default function Contact() {
   }
 
   return (
-    <Section id="contact" index="05" title="ESTABLISH UPLINK">
+    <Section id="contact" index="05" title="Get in touch">
       <div className="contact-layout">
         <div className="contact-info">
           <p>
             Open to robotics, autonomy, and software opportunities — or just a
-            conversation about surgical robots and space hardware. Transmissions
-            answered within 48 hours.
+            conversation about surgical robots and space hardware. I usually reply
+            within a couple of days.
           </p>
           <ul className="contact-channels">
             <li>
-              <span className="channel-label">EMAIL</span>
+              <span className="channel-label">Email</span>
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
             </li>
             <li>
-              <span className="channel-label">LINKEDIN</span>
+              <span className="channel-label">LinkedIn</span>
               <a href={profile.linkedin} target="_blank" rel="noreferrer">
                 /in/sujit-peramanu
               </a>
             </li>
             <li>
-              <span className="channel-label">BASE</span>
+              <span className="channel-label">Based in</span>
               <span>{profile.location}</span>
             </li>
           </ul>
         </div>
 
         <form className="contact-form hud-frame" onSubmit={handleSubmit}>
-          <div className="panel-title">// TRANSMISSION CONSOLE</div>
+          <div className="panel-title">Send a message</div>
           <label>
-            CALLSIGN <span className="req">*</span>
+            Name <span className="req">*</span>
             <input name="name" type="text" required placeholder="Your name" autoComplete="name" />
           </label>
           <label>
-            RETURN FREQUENCY <span className="req">*</span>
+            Email <span className="req">*</span>
             <input name="email" type="email" required placeholder="you@example.com" autoComplete="email" />
           </label>
           <label>
-            MESSAGE <span className="req">*</span>
-            <textarea name="message" required rows={5} placeholder="Type your transmission..." />
+            Message <span className="req">*</span>
+            <textarea name="message" required rows={5} placeholder="What's on your mind?" />
           </label>
           <button className="btn btn-primary" type="submit" disabled={status === 'sending'}>
-            {status === 'sending' ? 'TRANSMITTING...' : 'TRANSMIT ►'}
+            {status === 'sending' ? 'Sending…' : 'Send'}
           </button>
 
           {status === 'sent' && (
-            <div className="form-status ok">▸ TRANSMISSION RECEIVED. I'll get back to you soon.</div>
+            <div className="form-status ok">Message sent — I'll get back to you soon.</div>
           )}
           {status === 'error' && (
-            <div className="form-status err">▸ UPLINK FAILED. Try again or email me directly.</div>
+            <div className="form-status err">Something went wrong. Try again or email me directly.</div>
           )}
           {status === 'unconfigured' && (
             <div className="form-status err">
-              ▸ FORM NOT CONFIGURED. Set your Formspree ID in src/sections/Contact.jsx
+              Form not configured yet. Set your Formspree ID in src/sections/Contact.jsx
               — or email me directly at {profile.email}.
             </div>
           )}

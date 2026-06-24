@@ -1,23 +1,19 @@
-import { useState } from 'react';
 import Section from '../components/Section.jsx';
-import ProjectModal from '../components/ProjectModal.jsx';
 import { projects } from '../data/projects.js';
 
 export default function Projects() {
-  const [selected, setSelected] = useState(null);
-
   return (
-    <Section id="projects" index="03" title="PROJECT FILES">
+    <Section id="projects" index="03" title="Selected Work">
       <div className="project-grid">
         {projects.map((p) => (
-          <button
+          <a
             key={p.id}
+            href={`#/project/${p.id}`}
             className="project-card hud-frame"
-            onClick={() => setSelected(p)}
           >
             <div className="project-thumb">
               <img src={p.thumb} alt={p.title} loading="lazy" />
-              <span className="project-open-hint">OPEN FILE ►</span>
+              <span className="project-open-hint">View →</span>
             </div>
             <div className="project-card-body">
               <h3>{p.title}</h3>
@@ -31,13 +27,9 @@ export default function Projects() {
                 )}
               </div>
             </div>
-          </button>
+          </a>
         ))}
       </div>
-
-      {selected && (
-        <ProjectModal project={selected} onClose={() => setSelected(null)} />
-      )}
     </Section>
   );
 }

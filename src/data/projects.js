@@ -80,20 +80,4 @@ export const projects = [
     youtube: null,
     images: ['assets/projects/flamebot.svg'],
   },
-  {
-    id: 'robochef',
-    title: 'RoboChef',
-    subtitle: 'IMU-driven robotic arm follower',
-    period: 'Feb 2024',
-    role: 'Project Lead · Personal Project',
-    thumb: 'assets/projects/robochef.svg',
-    tags: ['ESP32', 'Bluetooth', 'IMU', 'Stepper Motors'],
-    description: [
-      'Designed and fabricated a robotic arm that mirrors human arm motion using commands derived from arm-mounted inertial sensor units.',
-      'Built a wireless link with an ESP32 Bluetooth master and an Arduino HC-05 module; engineered the MCU integration circuit driving three NEMA-17 steppers and a claw.',
-    ],
-    video: null,
-    youtube: null,
-    images: ['assets/projects/robochef.svg'],
-  },
 ];

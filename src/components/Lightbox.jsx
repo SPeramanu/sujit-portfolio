@@ -33,10 +33,10 @@ export default function Lightbox({ photos, index, onClose, onNavigate }) {
       <div className="lightbox" onClick={(e) => e.stopPropagation()}>
         <div className="lightbox-topbar">
           <span className="lightbox-counter">
-            IMG {String(index + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')}
+            {String(index + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')}
           </span>
           <button className="modal-close" onClick={onClose} aria-label="Close">
-            [ X ]
+            ✕
           </button>
         </div>
         <div className="lightbox-stage">

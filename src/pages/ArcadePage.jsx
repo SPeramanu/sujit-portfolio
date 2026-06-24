@@ -131,7 +131,7 @@ function LorenzBackground() {
     const RHO = 28;
     const BETA = 8 / 3;
     const DT = 0.005;
-    const PALETTE = ['#00f0ff', '#ff3cf0', '#ffd24a', '#7dffb0', '#ff5d73'];
+    const PALETTE = ['#b9542d', '#7a6a44', '#d2873a', '#c97b4a', '#e6c9a8'];
 
     const tracers = PALETTE.map((color, i) => ({
       x: 0.1 + i * 0.03,
@@ -369,7 +369,7 @@ function GameShell({ meta }) {
 
         {status === 'ready' && (
           <div className="game-overlay">
-            <h2 className="glitch" data-text={meta.title}>{meta.title}</h2>
+            <h2>{meta.title}</h2>
             <p className="overlay-sub">{meta.year}</p>
             <div className="control-legend">
               {meta.controls.map((c) => (
@@ -475,7 +475,7 @@ export default function ArcadePage() {
   const meta = GAMES.find((gm) => gm.id === sel) || null;
 
   return (
-    <div className="robotron-page">
+    <div className={`robotron-page ${meta ? 'robotron-page--game' : 'robotron-page--menu'}`}>
       <header className="robotron-header">
         {meta ? (
           <a
@@ -486,19 +486,19 @@ export default function ArcadePage() {
               window.location.hash = '#/arcade';
             }}
           >
-            ◄ ALL CABINETS
+            ← All cabinets
           </a>
         ) : (
           <a href="#hero" className="btn btn-ghost robotron-back">
-            ◄ RETURN TO BASE
+            ← Back
           </a>
         )}
         <div className="robotron-title">
-          <h1>{meta ? meta.title : 'THE ARCADE'}</h1>
+          <h1>{meta ? meta.title : 'The Arcade'}</h1>
           <p>
             {meta
-              ? `// ${meta.year}`
-              : '// FOUR ORIGINAL TRIBUTE CABINETS — ALL CODE & PIXELS FROM SCRATCH'}
+              ? meta.year
+              : 'Four original arcade tributes — every line of code and pixel built from scratch.'}
           </p>
         </div>
       </header>
