@@ -33,7 +33,7 @@ export const profile = {
      imitation-learning policies that perform surgical
      grasping under OCT guidance and robotics mission software that drives rovers on the Moon.`,
 
-    `I love the full stack of robotics which include perception, control,
+    `I love the full stack of robotics which includes perception, control,
      embedded firmware, software infrastructure, and data driven robot learning.`,
 
     `In my spare time you may find me planning the next trip or hanging out with my dog.
