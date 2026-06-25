@@ -192,11 +192,11 @@ export const projects = [
       eyebrow:
         'UTRA Autonomous Rover Team · University of Toronto · July 2023 – August 2024',
       lede:
-        '13-person team competing in the Intelligent Ground Vehicle Competition (IGVC) with a fully autonomous differential-drive rover. I worked across two areas: the ROS autonomy stack — SLAM, path planning, sensor fusion, and simulation — and the mechanical design of the motor mounts and frame structure.',
+        '13-person team competing in the Intelligent Ground Vehicle Competition (IGVC) with a fully autonomous differential-drive rover. I worked across two areas including the ROS autonomy stack (SLAM, path planning, sensor fusion, and simulation) and the mechanical design of the motor mounts and frame structure.',
       pipelineLabel: 'Autonomy stack · ROS pipeline',
       pipeline: [
         { k: 'Sensors', t: 'Dual LiDAR + ZED + IMU/GPS', s: 'Raw signal processing' },
-        { k: 'Odometry', t: 'robot_localization EKF', s: '5% drift reduction' },
+        { k: 'Odometry', t: 'Localization EKF', s: '5% drift reduction' },
         { k: 'SLAM', t: 'Cartographer mapping', s: 'CV costmap fusion' },
         { k: 'Planning', t: 'ROS Navigation Stack', s: 'navfn + local planner' },
         { k: 'Control', t: 'PID path tracking', s: '20% less veering' },
@@ -210,17 +210,17 @@ export const projects = [
         {
           title: 'ROS autonomy stack',
           body: [
-            "The rover's software followed a modular microservices architecture — odometry, SLAM mapping, path planning, and CV perception built as independent ROS nodes that could be tested and integrated separately.",
+            "The rover's software followed a modular microservices architecture. Odometry, SLAM mapping, path planning, and CV perception were built as independent ROS nodes that could be tested and integrated separately.",
             '## SLAM & mapping',
             '- Integrated Google Cartographer SLAM, fusing dual LiDAR scan data and odometry to generate real-time environmental maps for autonomous traversal',
-            '- Used a dual 2D LiDAR configuration (one at each height) to detect ramps through distance differencing — avoiding the cost of a 3D LiDAR unit while achieving the same classification result',
+            '- Used a dual 2D LiDAR configuration (one at each height) to detect ramps through distance differencing, avoiding the cost of a 3D LiDAR unit while achieving the same classification result',
             '- Projected CV lane and pothole detections (segmentation masks) into 3D using ZED depth data and merged them into the SLAM costmap via bitwise OR of detection masks',
             '## Sensor calibration & odometry',
             '- Calibrated and filtered the LiDAR and ZED stereo camera, processing raw hardware signals into clean ROS messages',
             '- Fused Hall-effect encoder data, IMU, GPS, and ZED visual odometry with the robot_localization EKF package — reducing odometry drift by 5%',
-            '- Validated odometry accuracy in Gazebo using the p3d_base_controller ground-truth plugin, comparing fused estimates against ground truth to isolate drift by sensor and fine-tune filter parameters',
+            '- Validated odometry accuracy in Gazebo using a base controller ground-truth plugin, comparing fused estimates against ground truth to isolate drift by sensor and fine-tune filter parameters',
             '## Path planning & control',
-            '- Configured the ROS Navigation Stack: costmap_2d reading from the Cartographer map, navfn for global planning, and base_local_planner for local trajectory generation',
+            '- Configured the ROS Navigation Stack: 2D costmap reading from the Cartographer map, navfn for global planning, and a base local planner for local trajectory generation',
             '- Wrote rospy control scripts and tuned a PID path-tracking controller, reducing off-course veering by 20%',
             '- Built a GPS waypoint goal-setting pipeline: coordinates loaded from ordered JSON, transformed from UTM to cartesian via navsat_transform_node, then dispatched to move_base',
             '- Developed a ramp-navigation mode that interrupts regular planning, places 0.5 m waypoint increments along the ramp, and constrains the trajectory to a straight line — reaching ~85% ramp traversal success',
@@ -240,7 +240,7 @@ export const projects = [
             '## Frame structure',
             '- Contributed to the 6061 T-slot aluminum-extrusion chassis in a "diagonal figure-8" configuration, balancing wheel geometry to keep the rover level across all terrain',
             '- Added diagonal cross-bracing on each side to prevent buckling under the battery and electronics load',
-            '- Validated structural integrity with ANSYS static-structural simulation — confirming no buckling or bending at loads exceeding competition requirements',
+            '- Validated structural integrity with ANSYS static-structural simulation which confirmed no buckling or bending at loads exceeding competition requirements',
           ],
         },
       ],
@@ -271,11 +271,11 @@ export const projects = [
         'FlameBot is an unmanned ground vehicle that autonomously surveys an area, identifies small fires, and extinguishes them before they spread. On a 4-person team I owned the embedded and controls side: the microcontroller firmware, the parallel state machines driving navigation and mitigation, the closed-loop control design, and the electrical power and sensor architecture that tied it all together.',
       pipelineLabel: 'Embedded control loop · Designed & implemented',
       pipeline: [
-        { k: 'Sense', t: '3× flame + 2× IR line + ultrasonic', s: '12-bit ADC acquisition' },
+        { k: 'Sense', t: '3 × flame + 2 × IR line + ultrasonic', s: '12-bit ADC acquisition' },
         { k: 'Decide', t: 'Parallel state machines', s: 'Navigation + mitigation' },
         { k: 'Navigate', t: 'Bang-Bang line following', s: 'PWM differential drive' },
         { k: 'Mitigate', t: 'Servo-aimed water turret', s: '0–180° sweep + pump' },
-        { k: 'Actuate', t: 'L298N drivers · 12 V rail', s: 'Real-time on ESP32' },
+        { k: 'Actuate', t: 'L298N drivers + 12 V rail', s: 'Real-time on ESP32 MCU' },
       ],
       stats: [
         { v: '180°', l: 'Frontal fire-detection arc split into three flame-sensor regions for turret aiming' },
@@ -286,25 +286,24 @@ export const projects = [
         {
           title: 'What I owned',
           body: [
-            'FlameBot splits wildfire prevention into three jobs — detect a fire, navigate to it, and extinguish it. My responsibility was making the robot actually decide and act in real time: the microcontroller program, the control logic, and the electrical backbone that powered and connected every sensor and actuator.',
+            'FlameBot splits wildfire prevention into three jobs: detect a fire, navigate to it, and extinguish it. My responsibility was making the robot actually decide and act in real time: the microcontroller program, the control logic, and the electrical backbone that powered and connected every sensor and actuator.',
             '## Microcontroller & firmware',
             '- Brought up the embedded platform in Embedded C / Arduino, reading the flame, IR line-tracking, and ultrasonic sensors and driving the motors, servo, and pump from a single real-time control loop',
-            '- Led the migration from the STM32WBA5CGU Nucleo-64 to the ESP32 WROOM DA after the STM32 toolchain made ADC sensor reads impractical to debug — UART-over-virtual-COM required physically soldering a bridge to the ST-LINK to recover the port',
-            '- Chose the ESP32 deliberately: Arduino-IDE compatibility, a rich peripheral set (UART, SPI, I²C, BLE, Wi-Fi), and ample memory — the final firmware used under 20% of available DRAM',
-            '- Used `const int` for every pin assignment to prevent accidental runtime reassignment, and structured function calls to keep stack growth from encroaching on program/data memory',
+            '- Led the migration from the STM32WBA5CGU Nucleo-64 to the ESP32 WROOM DA after the STM32 toolchain made ADC sensor reads impractical to debug',
+            '- Chose the ESP32 deliberately: Arduino-IDE compatibility, a rich peripheral set (UART, SPI, I²C, BLE, Wi-Fi), and ample memory. The final firmware used under 20% of available DRAM',
             '## Sensing & ADC',
             '- Acquired analog flame-sensor data through the 12-bit ADC (0–4095) and experimentally characterized the response, tuning each onboard potentiometer to set detection distance',
-            '- Determined the signal was effectively binary — clustering near ~200 (no fire) and ~4000 (fire) — and made the engineering call to skip filtering, trading a small amount of noise for minimal control-loop lag',
+            '- Determined the signal was effectively binary, clustering near ~200 (no fire) and ~4000 (fire), and made the call to skip filtering, trading a small amount of noise for minimal control-loop latency',
           ],
         },
         {
           title: 'Control systems & state machines',
           body: [
-            'I modeled the robot as two negative-feedback control loops running in parallel — one for navigation, one for fire mitigation — and formalized each as a state machine so the behavior was explicit, debuggable, and reconfigurable.',
+            'I modeled the robot as two negative-feedback control loops running in parallel (one for navigation, one for fire mitigation) and formalized each as a state machine so the behavior was explicit and reconfigurable.',
             '## Control design — PID vs. Bang-Bang',
             '- The original proposal called for a PID line-following controller; in practice the IR line sensors output a hard binary (line / no line), so a continuous error signal was not available',
             '- Evaluated the trade-off and selected a Bang-Bang controller: for a slow-moving surveyor bot it gave reliable tracking without the tuning overhead of PID, at the cost of needing per-run sensor calibration',
-            '- Tuned the turning response by driving a PWM of 175 to a single side motor to re-center on the line, and a forward PWM of 150 when the center sensor held the line',
+            '- Tuned the turning response by driving a PWM of 175 to a single side motor to re-center on the line, and a forward PWM of 150 when the center sensor aligned with the line',
             '## Parallel state machines',
             '- Navigation state machine: Forward / Turn-Left / Turn-Right states, transitioning on the left/right IR line-detection booleans to keep the robot centered on the path',
             '- Mitigation state machine: an idle Flame-Sensing state that branches into Aim-Left (0–60°), Aim-Center (60–120°), or Aim-Right (120–180°) based on which of the three flame sensors crosses the >4000 ADC threshold, then oscillates the servo and fires the pump until the fire clears',
@@ -320,36 +319,36 @@ export const projects = [
             '- Chose 8×AA (~2500 mAh) over a 9 V battery (~500 mAh) on an energy-capacity basis for longer mission runtime, and accounted for the L298N’s ~2 V drop (12 V in → ~10 V at the motors) in the drive budget',
             '## Integration debugging',
             '- Diagnosed an intermittent system-wide halt down to a failed breadboard — established that components passed individually, then isolated the fault by substitution rather than guesswork',
-            '- Traced repeated ESP32 brown-out resets during programming to insufficient USB current when the IR line sensors were attached; resolved it with a 5 V / 2.5 A power bank that stabilized the rail and restored code uploads',
-            '- Implemented ultrasonic ranging with timer-triggered pulses and `pulseIn()` echo timing for low-lag obstacle distance measurement',
+            '- Traced repeated ESP32 brown-out resets during programming to insufficient USB current when the IR line sensors were attached; resolved it with a 5 V / 2.5 A power bank that stabilized the system and restored code uploads',
+            '- Implemented ultrasonic ranging with timer-triggered pulses for low-latency obstacle distance measurement',
           ],
         },
       ],
-      cardsTitle: 'Engineering decisions that mattered',
+      cardsTitle: 'Engineering decisions made and some lessons learned',
       cards: [
         {
           icon: '◆',
           title: 'Knew when not to filter',
           body:
-            'After characterizing the flame sensor as near-binary through the 12-bit ADC, I deliberately omitted signal filtering — the lag and lost sharp transitions would have hurt a fast mitigation response more than the minor noise ever did.',
+            'After characterizing the flame sensor as near-binary through the 12-bit ADC, I deliberately omitted signal filtering. The lag and lost sharp transitions would have hurt a fast mitigation response more than the minor noise ever did.',
         },
         {
           icon: '⚙',
           title: 'PID on paper, Bang-Bang in reality',
           body:
-            'The binary IR line sensors gave no continuous error to feed a PID loop. Rather than force the architecture, I switched to Bang-Bang control — simpler, robust for a slow surveyor, and the right tool for the actual sensor data.',
+            'The binary IR line sensors gave no continuous error to feed a PID loop. Rather than force the architecture, we switched to Bang-Bang control which was simpler, robust for a slow surveyor, and the right tool for the actual sensor data.',
         },
         {
           icon: '⤳',
           title: 'Migrated the whole platform',
           body:
-            'When the STM32’s ADC/UART debug path required soldering a hardware bridge to even read sensors, I moved the project to the ESP32 WROOM DA — preserving BLE/Wi-Fi capability while unblocking the team’s iteration speed.',
+            'When the STM32’s ADC/UART debug path required soldering a hardware bridge to even read sensors, I moved the project to the ESP32 WROOM DA — preserving Wi-Fi capability while unblocking the team’s iteration speed.',
         },
         {
           icon: '⏛',
           title: 'Debugged at the system level',
           body:
-            'The hardest bugs only appeared on the assembled robot: a dead breadboard masquerading as a logic fault, and USB-current brown-outs killing uploads. I isolated both by methodical substitution and fixed the power architecture.',
+            'The hardest bugs only appeared on the assembled robot: a dead breadboard masquerading as a logic fault, and USB-current brown-outs killing uploads. Our team isolated both by methodical substitution and fixed the power architecture.',
         },
       ],
       outro: [
