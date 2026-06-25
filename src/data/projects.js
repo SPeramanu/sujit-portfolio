@@ -19,7 +19,8 @@ export const projects = [
     period: '2025 — Apr 2026',
     role: 'Undergraduate Thesis',
     thumb: 'assets/projects/OCT_system.jpg',
-    thesisUrl: 'assets/Sujit_Peramanu_Thesis.pdf',
+    reportUrl: 'assets/Sujit_Peramanu_Thesis.pdf',
+    reportLabel: 'Read the full thesis (PDF)',
     tags: ['Diffusion Policy', 'DP3', 'ACT', 'OCT', 'ROS 2', 'PyTorch', 'Point Clouds', 'RCM IK', 'NVIDIA H100'],
     rich: {
       eyebrow:
@@ -43,7 +44,7 @@ export const projects = [
         {
           title: 'Motivation & problem',
           body: [
-            'Minimally invasive robotic surgery demands precise, adaptive tool control within confined, anatomy-constrained workspaces. The perceptual modalities used today — endoscopic and stereo cameras — lack the axial resolution needed for micrometer-scale depth sensing and subsurface tissue imaging.',
+            'Minimally invasive robotic surgery demands precise, adaptive tool control within confined, anatomy-constrained workspaces. The perceptual modalities used today (endoscopic and stereo cameras) lack the axial resolution needed for micrometer-scale depth sensing and subsurface tissue imaging.',
             'Optical Coherence Tomography (OCT) is a high-resolution interferometric imaging modality that captures volumetric, subsurface structure. This thesis investigates whether OCT can serve as the primary observation source for imitation learning policies performing constrained surgical subtasks on a physical robotic arm.',
           ],
         },
@@ -51,9 +52,9 @@ export const projects = [
           title: 'Technical approach',
           body: [
             'I designed, implemented, and evaluated a complete end-to-end pipeline:',
-            '- Real-time multimodal data acquisition via a custom ROS 2 synchronization framework, with OCT volumes sampled directly from POSIX shared memory at up to 20 Hz — bypassing ROS serialization to minimize latency.',
+            '- Real-time multimodal data acquisition via a custom ROS 2 synchronization framework, with OCT volumes sampled directly from POSIX shared memory at up to 20 Hz, bypassing ROS serialization to minimize latency.',
             '- A Stäubli TX2-60L 6-DoF arm fitted with a da Vinci endowrist grasping tooltip, operating under a software-enforced Remote Center of Motion (RCM) constraint to simulate trocar-based minimally invasive surgery.',
-            '- Three imitation learning architectures — Diffusion Policy, 3D Diffusion Policy (DP3), and Action Chunking with Transformers (ACT) — trained on expert teleoperation demonstrations across absolute joint, relative joint, and Cartesian RCM control modes.',
+            '- Three imitation learning architectures: Diffusion Policy, 3D Diffusion Policy (DP3), and Action Chunking with Transformers (ACT). Policies were trained on expert teleoperation demonstrations across absolute joint, relative joint, and Cartesian RCM control modes.',
             '- An ablation over observation modalities: OCT point clouds, per-voxel OCT intensity, joint-angle proprioception, and six-axis wrist force-torque feedback — individually and in combination.',
             '- Training on NVIDIA H100 GPU clusters (Compute Canada), with inference deployed closed-loop at 10–15 Hz on the physical platform.',
           ],
@@ -65,7 +66,7 @@ export const projects = [
           icon: '◎',
           title: 'OCT alone is sufficient',
           body:
-            'Diffusion Policy conditioned solely on OCT point clouds augmented with per-voxel intensity achieved full task completion under both relative-joint and Cartesian RCM control — no cameras or proprioception required.',
+            'Diffusion Policy conditioned solely on OCT point clouds augmented with per-voxel intensity achieved full task completion under both relative-joint and Cartesian RCM control - no cameras or proprioception required.',
         },
         {
           icon: '⚠',
@@ -77,7 +78,7 @@ export const projects = [
           icon: '◧',
           title: 'Force feedback was drowned out',
           body:
-            'The 6-D wrench occupied <3% of the flattened observation space and received negligible gradient signal during training — suppressed by dimensionality disparity despite a genuine contact transient.',
+            'The 6-D wrench occupied <3% of the flattened observation space but most importantly it received negligible gradient signal during training. Further research is needed to deterministically model contact dynamics through force feedback.',
         },
         {
           icon: '◆',
@@ -91,13 +92,14 @@ export const projects = [
           title: 'Significance & contributions',
           body: [
             'This work establishes a working proof-of-concept that high-resolution volumetric OCT imaging can serve as a sufficient observation modality for diffusion-based visuomotor policy learning in constrained surgical settings.',
-            'It also leaves behind reusable research infrastructure: a shared-memory OCT acquisition pathway, a two-stage RCM inverse-kinematics solver, a velocity-gated dataset conversion step, and a comparative empirical baseline across three architectures and three control modes. Along the way I identified and resolved two practical pipeline issues — a zero-learned-distribution artifact from teleoperation pauses and a train-versus-inference point-cloud subsampling mismatch — each substantially improving rollout reliability.',
+            'It also leaves behind reusable research infrastructure: a shared-memory OCT acquisition pathway, a two-stage RCM inverse-kinematics solver, and a comparative empirical baseline across three architectures and three Staubli control modes. Along the way I identified and resolved two practical pipeline issues — OCT point cloud acquisition latency due to ROS2 serialization and a train-versus-inference point-cloud subsampling mismatch. Bohth improvements substantially improving rollout reliability.',
+            'Progress has been acheived in evaluating OCT conditioned imitation learning against subsurface imaging. These results have been successfully evaluated on a dual block grasping task with one block containing a physically anomalous subsurface feature. The policy was able to successfully grasp the block with the subsurface feature while avoiding the other block while rejecting nuisance disturbances, demonstrating that OCT can be used to condition policies for constrained and visibly indistinct grasping tasks. IEEE publication is in process.',
           ],
         },
       ],
     },
     description: [
-      'Thesis research investigating optical coherence tomography (OCT) as the sole visuomotor observation modality for learned surgical manipulation policies.',
+      'Thesis research investigating optical coherence tomography (OCT) as the sole visuomotor observation modality for learned surgical manipulation policies. IEEE publication in process.',
     ],
     video: 'assets/videos/oct_view.mp4', // e.g. 'assets/videos/oct-demo.mp4'
     youtube: null,
@@ -111,6 +113,8 @@ export const projects = [
     period: 'Jan 2026 — Apr 2026',
     role: 'Computer Vision Lead (sole owner of full CV stack)',
     thumb: 'assets/projects/Drone.png',
+    reportUrl: 'assets/RoboRangers_Capstone_Report.pdf',
+    reportLabel: 'Read the capstone report (PDF)',
     tags: ['YOLOv8n', 'TensorRT FP16', 'Stereo Depth (SGBM)', 'ROS 2', 'PyCUDA', 'Jetson Nano', 'Intel RealSense T265', 'Kalibr calibration', 'IMX219', 'Python'],
     // Custom long-form layout (rendered by ProjectPage when `rich` is present).
     rich: {
@@ -134,8 +138,8 @@ export const projects = [
           title: 'What I built and why it was hard',
           body: [
             'The system needed to localize a moving ground target in 3D from a drone hovering at 0.5 m, using only edge hardware. I built the full perception pipeline: a custom-trained YOLOv8n model, exported to ONNX and compiled as a TensorRT FP16 engine on the Jetson Nano, running asynchronously via PyCUDA so MAVROS flight-control callbacks were never blocked.',
-            "Depth came from the T265's stereo fisheye pair using Kannala-Brandt undistortion and CLAHE preprocessing. I implemented a dynamic adaptive EMA filter that tightens smoothing during hover and loosens it during rapid motion — a deliberate design choice to balance noise suppression against responsiveness. I also added per-frame depth jump rejection (>1 m threshold) to handle flight vibrations.",
-            'Fusing the 2D centroid from the IMX219 with T265 depth required precise cross-camera calibration using Kalibr on an AprilGrid target, yielding the rigid transform between the two sensor frames. I back-projected the detected centroid through IMX intrinsics, transformed it to the fisheye frame, then reconstructed the full 3D point — depth sampled over a bounding-box-scaled window to reduce outlier sensitivity. The result: sub-centimetre accuracy at desk-test distances, and robust real-time detection through varied lighting and shadows in flight.',
+            "Depth came from the T265's stereo fisheye pair using Kannala-Brandt undistortion and CLAHE preprocessing. I implemented a dynamic adaptive EMA filter that tightens smoothing during hover and loosens it during rapid motion, which was a deliberate design choice to balance noise suppression against responsiveness. I also added per-frame depth jump rejection (>1 m threshold) to handle flight vibrations.",
+            'Fusing the 2D centroid from the IMX219 with T265 depth required precise cross-camera calibration using Kalibr on an AprilGrid target, providing the rigid transformation matrix between the two sensor frames. I back-projected the detected centroid through IMX intrinsics, transformed it to the fisheye frame, then reconstructed the full 3D point. The result was sub-centimetre accuracy at 1-2m distances, and robust real-time detection through varied lighting and shadows in flight.',
           ],
         },
       ],
@@ -144,13 +148,13 @@ export const projects = [
           icon: '⚡',
           title: 'Edge deployment challenges',
           body:
-            'PyTorch YOLOv8n was unusable on the Nano at flight latencies. I converted to ONNX, then compiled a TensorRT engine with FP16 quantization, layer fusion, and kernel tuning — bringing inference latency from intractable to real-time, while keeping the ROS 2 executor responsive.',
+            'PyTorch YOLOv8n was unusable on the Nano at flight latencies. I converted to ONNX, then compiled a TensorRT engine with FP16 quantization, layer fusion, and kernel tuning, bringing inference latency from intractable to 20Hz, while keeping the ROS2 executor responsive to controls.',
         },
         {
           icon: '◆',
           title: 'Dataset & training',
           body:
-            'Collected and hand-labelled 1,000 IMX219 frames at varying orientations, altitudes, distances, and with distractors (chairs, etc.). Trained on an RTX 2080Ti for 100 epochs. Model generalized across lighting conditions and shadow — verified with a Vicon-tagged version of the target.',
+            'Collected and hand-labelled 1,000 IMX219 frames at varying orientations, altitudes, distances, and with distractors (chairs, people, etc.). Trained model on an RTX 2080Ti for 100 epochs. Model generalized across lighting conditions and shadow — verified with a Vicon-tagged version of the target.',
         },
         {
           icon: '⬡',
@@ -167,7 +171,7 @@ export const projects = [
       ],
     },
     description: [
-      'Autonomous drone system for detecting, tracking, and capturing invasive wild pigs using a deployed net. I solely built the full onboard computer vision pipeline — from sensor fusion architecture to real-time TensorRT deployment on a Jetson Nano — achieving ±2 cm 3D pose accuracy at 20 Hz.',
+      'Autonomous drone system for detecting, tracking, and capturing invasive wild pigs using a deployed net. I built the full onboard computer vision pipeline from sensor fusion architecture to real-time TensorRT deployment on a Jetson Nano, achieving ±2 cm 3D pose accuracy at 20 Hz.',
     ],
     video: null,
     youtube: null,
