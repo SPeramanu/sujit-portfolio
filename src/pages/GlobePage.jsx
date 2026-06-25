@@ -20,6 +20,7 @@ export default function GlobePage() {
   const selectedIdRef = useRef(null);
   const [selected, setSelected] = useState(null);
   const [activeImg, setActiveImg] = useState(0);
+  const [lightbox, setLightbox] = useState(false);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -118,7 +119,7 @@ export default function GlobePage() {
         </a>
         <div className="globe-title">
           <h1>Places</h1>
-          <p>Where the work has taken me — drag to rotate, or pick a spot.</p>
+          <p>Where work and travel has taken me. Drag to rotate the globe.</p>
         </div>
       </header>
 
@@ -167,28 +168,112 @@ export default function GlobePage() {
             <p className="globe-panel-blurb">{selected.blurb}</p>
             {selected.images?.length > 0 && (
               <div className="globe-panel-gallery">
-                <img
-                  src={selected.images[activeImg]}
-                  alt={`${selected.name} — photo ${activeImg + 1}`}
-                />
+                <div className="globe-slideshow">
+                  {selected.images.length > 1 && (
+                    <button
+                      className="globe-slide-btn globe-slide-prev"
+                      onClick={() => setActiveImg((activeImg - 1 + selected.images.length) % selected.images.length)}
+                      aria-label="Previous image"
+                    >
+                      ‹
+                    </button>
+                  )}
+                  <img
+                    src={selected.images[activeImg]}
+                    alt={`${selected.name} — photo ${activeImg + 1}`}
+                    onClick={() => setLightbox(true)}
+                    style={{ cursor: 'zoom-in' }}
+                  />
+                  {selected.images.length > 1 && (
+                    <button
+                      className="globe-slide-btn globe-slide-next"
+                      onClick={() => setActiveImg((activeImg + 1) % selected.images.length)}
+                      aria-label="Next image"
+                    >
+                      ›
+                    </button>
+                  )}
+                </div>
                 {selected.images.length > 1 && (
-                  <div className="modal-thumbs">
-                    {selected.images.map((src, i) => (
-                      <button
-                        key={src}
-                        className={i === activeImg ? 'active' : ''}
-                        onClick={() => setActiveImg(i)}
-                      >
-                        <img src={src} alt="" />
-                      </button>
-                    ))}
-                  </div>
+                  <>
+                    <div className="globe-slide-dots">
+                      {selected.images.map((_, i) => (
+                        <button
+                          key={i}
+                          className={`globe-dot ${i === activeImg ? 'active' : ''}`}
+                          onClick={() => setActiveImg(i)}
+                          aria-label={`Photo ${i + 1}`}
+                        />
+                      ))}
+                    </div>
+                    <div className="modal-thumbs">
+                      {selected.images.map((src, i) => (
+                        <button
+                          key={src}
+                          className={i === activeImg ? 'active' : ''}
+                          onClick={() => setActiveImg(i)}
+                        >
+                          <img src={src} alt="" />
+                        </button>
+                      ))}
+                    </div>
+                  </>
                 )}
               </div>
             )}
           </>
         )}
       </aside>
+
+      {lightbox && selected && selected.images?.length > 0 && (
+        <div
+          className="globe-lightbox"
+          onClick={() => setLightbox(false)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') setLightbox(false);
+            if (e.key === 'ArrowRight') setActiveImg((activeImg + 1) % selected.images.length);
+            if (e.key === 'ArrowLeft') setActiveImg((activeImg - 1 + selected.images.length) % selected.images.length);
+          }}
+          tabIndex={0}
+          ref={(el) => el?.focus()}
+        >
+          {selected.images.length > 1 && (
+            <button
+              className="globe-lb-btn globe-lb-prev"
+              onClick={(e) => { e.stopPropagation(); setActiveImg((activeImg - 1 + selected.images.length) % selected.images.length); }}
+              aria-label="Previous"
+            >
+              ‹
+            </button>
+          )}
+          <img
+            src={selected.images[activeImg]}
+            alt={`${selected.name} — photo ${activeImg + 1}`}
+            onClick={(e) => e.stopPropagation()}
+          />
+          {selected.images.length > 1 && (
+            <button
+              className="globe-lb-btn globe-lb-next"
+              onClick={(e) => { e.stopPropagation(); setActiveImg((activeImg + 1) % selected.images.length); }}
+              aria-label="Next"
+            >
+              ›
+            </button>
+          )}
+          <button
+            className="globe-lb-close"
+            onClick={() => setLightbox(false)}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+          {selected.images.length > 1 && (
+            <div className="globe-lb-counter">
+              {activeImg + 1} / {selected.images.length}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

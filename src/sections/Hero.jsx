@@ -1,4 +1,3 @@
-import MusicPlayer from '../components/MusicPlayer.jsx';
 import useTypewriter from '../hooks/useTypewriter.js';
 import { profile } from '../data/profile.js';
 
@@ -16,7 +15,7 @@ export default function Hero() {
             <span className="type-cursor">|</span>
           </div>
           <p className="hero-blurb">
-            I build robots that see, learn, and act — for the benefit of the space
+            I seek to build robots that see, learn, and act for the benefit of the space
             and medical communities.
           </p>
           <div className="hero-cta">
@@ -33,8 +32,6 @@ export default function Hero() {
           <img src="assets/photos/portrait.jpg" alt="Sujit Peramanu" />
         </div>
       </div>
-
-      <MusicPlayer />
 
       <a href="#about" className="scroll-indicator" aria-label="Scroll to about">
         <span className="scroll-chevron">▼</span>

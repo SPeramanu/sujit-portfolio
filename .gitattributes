@@ -1,0 +1,18 @@
+# Treat binary media as binary so core.autocrlf never line-ending-mangles
+# (and corrupts) them. Without this, committing a .mp4/.png/etc. under
+# autocrlf=true can corrupt the file.
+*.mp4   binary
+*.mov   binary
+*.webm  binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.eot   binary

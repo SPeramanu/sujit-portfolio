@@ -4,7 +4,6 @@ const LINKS = [
   { href: '#about', label: 'ABOUT' },
   { href: '#experience', label: 'EXPERIENCE' },
   { href: '#projects', label: 'PROJECTS' },
-  { href: '#photography', label: 'PHOTOGRAPHY' },
   { href: '#contact', label: 'CONTACT' },
   { href: '#/globe', label: 'GLOBE', special: true },
   { href: '#/arcade', label: 'ARCADE', special: true },

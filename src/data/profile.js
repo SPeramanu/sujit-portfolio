@@ -13,10 +13,10 @@ export const profile = {
     'AUTONOMY & PERCEPTION',
   ],
   location: 'Toronto, Canada',
-  email: 'sujit.peramanu@mail.utoronto.ca',
+  email: 'sujitp2003@gmail.com',
   phone: '403-969-6430',
   linkedin: 'https://ca.linkedin.com/in/sujit-peramanu',
-  github: 'https://github.com/', // <-- add your GitHub username
+  github: 'https://github.com/SPeramanu',
   resumeUrl: 'assets/Sujit_Peramanu_Resume.pdf', // drop your PDF in /public/assets
 
   // ---- ABOUT section ----
