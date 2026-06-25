@@ -95,10 +95,17 @@ export default function MusicPlayer() {
   const onDragMove = (e) => {
     if (!drag.current.active) return;
     const rect = rootRef.current.getBoundingClientRect();
+    // Keep the player clear of the fixed navbar so it can't be dragged under it.
+    const navH =
+      parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue('--nav-h'),
+        10
+      ) || 64;
+    const minY = navH + 8;
     const maxX = window.innerWidth - rect.width - 8;
     const maxY = window.innerHeight - rect.height - 8;
     const x = Math.max(8, Math.min(maxX, e.clientX - drag.current.offX));
-    const y = Math.max(8, Math.min(maxY, e.clientY - drag.current.offY));
+    const y = Math.max(minY, Math.min(maxY, e.clientY - drag.current.offY));
     setPos({ x, y });
   };
   const onDragEnd = (e) => {

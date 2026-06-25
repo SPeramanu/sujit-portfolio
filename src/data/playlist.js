@@ -18,12 +18,10 @@
 
 export const playlist = [
   { id: 'rocket-man',  title: 'Rocket Man',                 artist: 'Elton John',       src: 'assets/music/rocket-man.mp3',  accent: '#ff9f1c' },
-  { id: 'headlines',   title: 'Headlines',                  artist: 'Drake',            src: 'assets/music/headlines.mp3',   accent: '#ffd24a' },
   { id: 'back-in-black', title: 'Back in Black',            artist: 'AC/DC',            src: 'assets/music/back-in-black.mp3', accent: '#ff3b5c' },
   { id: 'heavens-door', title: "Knockin' on Heaven's Door", artist: 'Bob Dylan',        src: 'assets/music/heavens-door.mp3', accent: '#6aa9ff' },
   { id: 'get-lucky',   title: 'Get Lucky',                  artist: 'Daft Punk',        src: 'assets/music/get-lucky.mp3',   accent: '#ff3cf0' },
   { id: 'watchtower',  title: 'All Along the Watchtower',   artist: 'Jimi Hendrix',     src: 'assets/music/watchtower.mp3',  accent: '#9b6bff' },
-  { id: 'piano-man',   title: 'Piano Man',                  artist: 'Billy Joel',       src: 'assets/music/piano-man.mp3',   accent: '#ffb24a' },
   { id: 'beat-it',     title: 'Beat It',                    artist: 'Michael Jackson',  src: 'assets/music/beat-it.mp3',     accent: '#ff5050' },
   { id: 'horse',       title: 'A Horse with No Name',       artist: 'America',          src: 'assets/music/horse.mp3',       accent: '#7dffb0' },
 

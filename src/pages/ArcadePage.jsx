@@ -16,9 +16,9 @@ const GAMES = [
     Engine: RobotronGame,
     w: VW,
     h: VH,
-    title: 'ROBO-RAID 2084',
-    year: 'TWIN-STICK TRIBUTE · 1982',
-    desc: 'The robots have turned. Move with one hand, shoot with the other, and save the last human family from the uprising.',
+    title: 'ROBOTRON: 2084',
+    year: 'TRIBUTE · 1982',
+    desc: 'Use two joysticks to move and shoot in any direction simultaneously, destroying waves of robots',
     stat: 'WAVE',
     touch: 'twin',
     controls: [
@@ -40,9 +40,9 @@ const GAMES = [
     Engine: MuncherGame,
     w: MW,
     h: MH,
-    title: 'MUNCH PROTOCOL',
-    year: 'MAZE-CHASE TRIBUTE · 1980',
-    desc: 'Clear the maze pellet by pellet while four ghosts hunt you — each with its own personality. Energizers turn the tables.',
+    title: 'PAC-MAN',
+    year: 'TRIBUTE · 1980',
+    desc: 'Clear the maze pellet by pellet while four ghosts hunt you. Stack energizers for powerups',
     stat: 'LEVEL',
     touch: 'dpad',
     controls: [
@@ -64,9 +64,9 @@ const GAMES = [
     Engine: GirderGame,
     w: GW,
     h: GH,
-    title: 'GIRDER GAUNTLET',
-    year: 'BARREL-CLIMB TRIBUTE · 1981',
-    desc: 'A giant ape hurls barrels down six sloped girders. Climb, jump, grab the hammer, and reach the captive before the bonus runs out.',
+    title: 'DONKEY KONG',
+    year: 'TRIBUTE · 1981',
+    desc: 'A giant ape hurls barrels down six sloped girders - climb, jump, and grab the hammer to reach the captive princess',
     stat: 'STAGE',
     touch: 'dpad-jump',
     controls: [
@@ -89,9 +89,9 @@ const GAMES = [
     Engine: LanderGame,
     w: LW,
     h: LH,
-    title: 'MARE DESCENT',
-    year: 'GRAVITY-LANDER TRIBUTE · 1979',
-    desc: 'Procedural lunar terrain, real thrust-and-gravity physics, and three beacon pads. Kill your velocity, stay upright, watch the fuel — narrow pads pay 5×.',
+    title: 'LUNAR LANDER',
+    year: 'TRIBUTE · 1979',
+    desc: 'Thrust and rotate to navigate your descending spacecraft, balancing your limited fuel against safe vertical velocity to achieve a successful landing',
     stat: 'SORTIE',
     touch: 'dpad-jump',
     jumpLabel: 'THRUST',
@@ -498,7 +498,7 @@ export default function ArcadePage() {
           <p>
             {meta
               ? meta.year
-              : 'Four original arcade tributes — every line of code and pixel built from scratch.'}
+              : 'Four original arcade tributes reproduced.'}
           </p>
         </div>
       </header>

@@ -7,7 +7,7 @@ import { profile } from '../data/profile.js';
 //  Setup: 1) create a form at https://formspree.io
 //         2) replace YOUR_FORM_ID below with the ID it gives you
 // ============================================================
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeebeeee';
 
 export default function Contact() {
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
@@ -41,9 +41,7 @@ export default function Contact() {
       <div className="contact-layout">
         <div className="contact-info">
           <p>
-            Open to robotics, autonomy, and software opportunities — or just a
-            conversation about surgical robots and space hardware. I usually reply
-            within a couple of days.
+            I am always happy to talk tech. Feel free to reach out any time — I will respond as soon as I can.
           </p>
           <ul className="contact-channels">
             <li>
@@ -54,6 +52,12 @@ export default function Contact() {
               <span className="channel-label">LinkedIn</span>
               <a href={profile.linkedin} target="_blank" rel="noreferrer">
                 /in/sujit-peramanu
+              </a>
+            </li>
+            <li>
+              <span className="channel-label">GitHub</span>
+              <a href={profile.github} target="_blank" rel="noreferrer">
+                /SPeramanu
               </a>
             </li>
             <li>

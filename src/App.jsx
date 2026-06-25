@@ -1,11 +1,11 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import Navbar from './components/Navbar.jsx';
 import FractalBackground from './components/FractalBackground.jsx';
+import MusicPlayer from './components/MusicPlayer.jsx';
 import Hero from './sections/Hero.jsx';
 import About from './sections/About.jsx';
 import Experience from './sections/Experience.jsx';
 import Projects from './sections/Projects.jsx';
-import Photography from './sections/Photography.jsx';
 import Contact from './sections/Contact.jsx';
 import Footer from './sections/Footer.jsx';
 import ProjectPage from './pages/ProjectPage.jsx';
@@ -46,7 +46,6 @@ function MainPage() {
         <About />
         <Experience />
         <Projects />
-        <Photography />
         <Contact />
       </main>
       <Footer />
@@ -65,6 +64,9 @@ export default function App() {
 
   return (
     <>
+      {/* Rendered once at the root so the draggable/minimizable player persists
+          across every route — music keeps playing as you navigate. */}
+      <MusicPlayer />
       {route === 'globe' ? (
         <Suspense
           fallback={
