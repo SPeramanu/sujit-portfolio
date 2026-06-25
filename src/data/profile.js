@@ -26,18 +26,18 @@ export const profile = {
      Robotics with a minor in Artificial Intelligence. I believe we are at a precipice where
      robotics and physical AI have the capacity to fundamentally improve our lives through two
      primary entry points: medicine and space. I have dedicated my time to both of these areas,
-     in industry and in research. Ultimately, I have sought to build machines that see,
-     decide, and act — from imitation-learning policies that perform surgical
-     grasping under OCT guidance, to mission software that drives rovers on the Moon.`,
+     in industry and in research. 
+     
+     My goal is to to build machines that see,
+     decide, and act on both a micro and macro scale. These pursuits have led me to work on 
+     imitation-learning policies that perform surgical
+     grasping under OCT guidance and robotics mission software that drives rovers on the Moon.`,
 
-    `My road has taken me through lunar mission control rooms in Ottawa, satellite
-     test facilities in Munich, and surgical robotics labs in Toronto.
-     I love the full stack of robotics — perception, control,
-     embedded firmware, and the software infrastructure that ties it all together.`,
+    `I love the full stack of robotics which include perception, control,
+     embedded firmware, software infrastructure, and data driven robot learning.`,
 
-    `Off the clock you'll find me behind a camera lens or planning the next trip.
-     Check out the photography section below, or spin the globe to see where I've
-     been.`,
+    `In my spare time you may find me planning the next trip or hanging out with my dog.
+     Check out some of the places I've been to by spinning the globe.`,
   ],
 
   // Quick-read stats shown in the about HUD panel.
