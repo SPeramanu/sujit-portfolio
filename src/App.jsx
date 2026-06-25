@@ -21,7 +21,9 @@ const ArcadePage = lazy(() => import('./pages/ArcadePage.jsx'));
 function getRoute() {
   const h = window.location.hash;
   if (h.startsWith('#/globe')) return 'globe';
-  if (h.startsWith('#/arcade') || h.startsWith('#/robotron')) return 'arcade';
+  // Arcade temporarily disabled — re-enable by uncommenting this line
+  // (and the nav link in components/Navbar.jsx).
+  // if (h.startsWith('#/arcade') || h.startsWith('#/robotron')) return 'arcade';
   if (h.startsWith('#/project/')) return 'project';
   return 'main';
 }

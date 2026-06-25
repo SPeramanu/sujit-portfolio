@@ -6,7 +6,9 @@ const LINKS = [
   { href: '#projects', label: 'PROJECTS' },
   { href: '#contact', label: 'CONTACT' },
   { href: '#/globe', label: 'GLOBE', special: true },
-  { href: '#/arcade', label: 'ARCADE', special: true },
+  // Arcade temporarily disabled — re-enable by uncommenting this line
+  // (and the route in App.jsx getRoute()).
+  // { href: '#/arcade', label: 'ARCADE', special: true },
 ];
 
 export default function Navbar() {
