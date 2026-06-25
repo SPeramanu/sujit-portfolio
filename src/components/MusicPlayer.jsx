@@ -33,7 +33,7 @@ export default function MusicPlayer() {
     return Number.isFinite(v) && v >= 0 && v <= 1 ? v : 0.7;
   });
   const [muted, setMuted] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   const track = playlist[index];
 
