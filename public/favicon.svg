@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="8" fill="#060a12"/>
-  <g fill="none" stroke="#00f0ff" stroke-width="3">
+  <rect width="64" height="64" rx="8" fill="#241d16"/>
+  <g fill="none" stroke="#b9542d" stroke-width="3">
     <path d="M14 14 h10 M14 14 v10"/>
     <path d="M50 14 h-10 M50 14 v10"/>
     <path d="M14 50 h10 M14 50 v-10"/>
     <path d="M50 50 h-10 M50 50 v-10"/>
   </g>
-  <text x="32" y="40" font-family="monospace" font-size="22" font-weight="bold" fill="#00f0ff" text-anchor="middle">SP</text>
+  <text x="32" y="40" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="bold" fill="#fbf7ef" text-anchor="middle">SP</text>
 </svg>
