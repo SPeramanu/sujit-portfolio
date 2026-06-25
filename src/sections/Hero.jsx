@@ -15,7 +15,7 @@ export default function Hero() {
             <span className="type-cursor">|</span>
           </div>
           <p className="hero-blurb">
-            I seek to build robots that see, learn, and act for the benefit of the space
+            I seek to build robots that see, learn, and act for the benefit of space
             and medical communities.
           </p>
           <div className="hero-cta">
