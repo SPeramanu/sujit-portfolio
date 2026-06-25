@@ -202,11 +202,11 @@ export default function ProjectPage() {
               </section>
             ))}
 
-            {project.thesisUrl && (
+            {project.reportUrl && (
               <div className="project-links">
-                <a href={project.thesisUrl} target="_blank" rel="noreferrer" className="project-link">
+                <a href={project.reportUrl} target="_blank" rel="noreferrer" className="project-link">
                   <span className="project-link-icon" aria-hidden="true">&#x25B6;</span>
-                  Read the full thesis (PDF)
+                  {project.reportLabel || 'Read the full report (PDF)'}
                 </a>
               </div>
             )}
