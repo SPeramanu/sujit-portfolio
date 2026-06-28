@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar.jsx';
 import FractalBackground from './components/FractalBackground.jsx';
 import MusicPlayer from './components/MusicPlayer.jsx';
@@ -94,6 +95,7 @@ export default function App() {
       ) : (
         <MainPage />
       )}
+      <Analytics />
     </>
   );
 }
