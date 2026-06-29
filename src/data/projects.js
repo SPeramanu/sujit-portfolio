@@ -84,7 +84,7 @@ export const projects = [
           icon: '◆',
           title: 'Diffusion outperformed ACT',
           body:
-            "ACT's CVAE latent prior collapsed to an averaged action under multimodal OCT conditioning, producing erratic rollouts. Diffusion Policy won across all three control modes.",
+            "ACT's CVAE latent prior collapsed to an averaged action under multimodal OCT conditioning, producing strange, erratic rollouts. Diffusion Policy won over all three Staubli control modes.",
         },
       ],
       outro: [
@@ -135,11 +135,11 @@ export const projects = [
       ],
       sections: [
         {
-          title: 'What I built and why it was hard',
+          title: 'Full CV pipeline',
           body: [
             'The system needed to localize a moving ground target in 3D from a drone hovering at 0.5 m, using only edge hardware. I built the full perception pipeline: a custom-trained YOLOv8n model, exported to ONNX and compiled as a TensorRT FP16 engine on the Jetson Nano, running asynchronously via PyCUDA so MAVROS flight-control callbacks were never blocked.',
             "Depth came from the T265's stereo fisheye pair using Kannala-Brandt undistortion and CLAHE preprocessing. I implemented a dynamic adaptive EMA filter that tightens smoothing during hover and loosens it during rapid motion, which was a deliberate design choice to balance noise suppression against responsiveness. I also added per-frame depth jump rejection (>1 m threshold) to handle flight vibrations.",
-            'Fusing the 2D centroid from the IMX219 with T265 depth required precise cross-camera calibration using Kalibr on an AprilGrid target, providing the rigid transformation matrix between the two sensor frames. I back-projected the detected centroid through IMX intrinsics, transformed it to the fisheye frame, then reconstructed the full 3D point. The result was sub-centimetre accuracy at 1-2m distances, and robust real-time detection through varied lighting and shadows in flight.',
+            'Fusing the 2D centroid from the IMX219 with T265 depth required precise cross-camera calibration using Kalibr on an AprilGrid target, providing the rigid transformation matrix between the two sensor frames. I back-projected the detected centroid through IMX intrinsics, transformed it to the fisheye frame, then reconstructed the full 3D point. The result was within 5cm accuracy at 1-2m distances, and robust real-time detection through varied lighting and shadows in flight.',
           ],
         },
       ],
@@ -154,19 +154,19 @@ export const projects = [
           icon: '◆',
           title: 'Dataset & training',
           body:
-            'Collected and hand-labelled 1,000 IMX219 frames at varying orientations, altitudes, distances, and with distractors (chairs, people, etc.). Trained model on an RTX 2080Ti for 100 epochs. Model generalized across lighting conditions and shadow — verified with a Vicon-tagged version of the target.',
+            'Collected and hand-labelled 1,000 IMX219 frames at varying orientations, altitudes, distances, and with distractions (chairs, people, shadows, etc.). Trained model on an RTX 2080Ti for 100 epochs. Model generalized across lighting conditions and shadow — verified with a Vicon-tagged version of the target.',
         },
         {
           icon: '⬡',
           title: 'ROS 2 architecture',
           body:
-            'Decomposed perception into three independent ROS 2 nodes: YOLOv8n inference, stereo depth estimation, and 3D pose fusion. Async execution via PyCUDA prevented blocking — critical for MAVROS reliability. Detection at 20 Hz, depth at 8 Hz, fused output at detection rate.',
+            'Decomposed perception into three independent ROS 2 nodes: YOLOv8n inference, stereo depth estimation, and 3D pose fusion. Async execution via PyCUDA prevented blocking which was critical for MAVROS reliability. We ran detection at 20 Hz, depth extraction at 8 Hz, and fused the output at the detection rate.',
         },
         {
           icon: '⛓',
           title: 'Integration constraint',
           body:
-            'Full CV integration was blocked by platform-level power and scheduling limits — running all subsystems simultaneously overwhelmed MAVROS comms. The CV pipeline itself was validated independently with sub-2 cm noise and flight-stable detection; the bottleneck was hardware, not perception.',
+            'Full CV integration was blocked by platform-level power and scheduling limits. Running all subsystems simultaneously overwhelmed MAVROS comms. The CV pipeline itself was validated independently with sub-2 cm noise and flight-stable detection; the bottleneck was hardware, not perception.',
         },
       ],
     },
