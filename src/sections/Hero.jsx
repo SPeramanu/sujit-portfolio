@@ -20,7 +20,7 @@ export default function Hero() {
           </p>
           <div className="hero-cta">
             <a href="#projects" className="btn btn-primary">
-              View Work
+              View Projects
             </a>
             <a href="#contact" className="btn btn-ghost">
               Contact

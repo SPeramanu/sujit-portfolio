@@ -12,7 +12,7 @@ export default function About() {
         </div>
 
         <aside className="about-panel hud-frame">
-          <div className="panel-title">At a glance</div>
+          <div className="panel-title">Quick Background</div>
           <dl className="stat-list">
             {profile.stats.map((s) => (
               <div key={s.label} className="stat-row">
