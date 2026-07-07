@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 
 const LINKS = [
   { href: '#about', label: 'ABOUT' },
-  { href: '#experience', label: 'EXPERIENCE' },
   { href: '#projects', label: 'PROJECTS' },
+  { href: '#coursework', label: 'COURSEWORK' },
+  { href: '#experience', label: 'EXPERIENCE' },
   { href: '#contact', label: 'CONTACT' },
   { href: '#/globe', label: 'GLOBE', special: true },
   // Arcade temporarily disabled — re-enable by uncommenting this line

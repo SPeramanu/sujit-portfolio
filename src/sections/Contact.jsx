@@ -75,11 +75,11 @@ export default function Contact() {
           </label>
           <label>
             Email <span className="req">*</span>
-            <input name="email" type="email" required placeholder="you@example.com" autoComplete="email" />
+            <input name="email" type="email" required placeholder="Your email address" autoComplete="email" />
           </label>
           <label>
             Message <span className="req">*</span>
-            <textarea name="message" required rows={5} placeholder="What's on your mind?" />
+            <textarea name="message" required rows={5} placeholder="Type message here" />
           </label>
           <button className="btn btn-primary" type="submit" disabled={status === 'sending'}>
             {status === 'sending' ? 'Sending…' : 'Send'}

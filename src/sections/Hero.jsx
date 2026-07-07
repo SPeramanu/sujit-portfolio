@@ -22,7 +22,27 @@ export default function Hero() {
             <a href="#projects" className="btn btn-primary">
               View Projects
             </a>
-            <a href="#contact" className="btn btn-ghost">
+            <a
+              href="#coursework"
+              className="btn btn-tint"
+              style={{ '--btn-accent': '#4f7a6a' }}
+            >
+              Coursework
+            </a>
+            <a
+              href={profile.resumeUrl}
+              className="btn btn-tint"
+              style={{ '--btn-accent': '#4a6a86' }}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Resume
+            </a>
+            <a
+              href="#contact"
+              className="btn btn-tint"
+              style={{ '--btn-accent': '#8a4f6d' }}
+            >
               Contact
             </a>
           </div>

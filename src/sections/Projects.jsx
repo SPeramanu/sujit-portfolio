@@ -3,7 +3,7 @@ import { projects } from '../data/projects.js';
 
 export default function Projects() {
   return (
-    <Section id="projects" index="03" title="Selected Work">
+    <Section id="projects" index="02" title="Projects">
       <div className="project-grid">
         {projects.map((p) => (
           <a

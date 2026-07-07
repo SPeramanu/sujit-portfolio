@@ -5,8 +5,9 @@ import FractalBackground from './components/FractalBackground.jsx';
 import MusicPlayer from './components/MusicPlayer.jsx';
 import Hero from './sections/Hero.jsx';
 import About from './sections/About.jsx';
-import Experience from './sections/Experience.jsx';
 import Projects from './sections/Projects.jsx';
+import Experience from './sections/Experience.jsx';
+import Coursework from './sections/Coursework.jsx';
 import Contact from './sections/Contact.jsx';
 import Footer from './sections/Footer.jsx';
 import ProjectPage from './pages/ProjectPage.jsx';
@@ -47,8 +48,9 @@ function MainPage() {
       <main>
         <Hero />
         <About />
-        <Experience />
         <Projects />
+        <Coursework />
+        <Experience />
         <Contact />
       </main>
       <Footer />

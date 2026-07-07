@@ -35,7 +35,7 @@ function TimelineEntry({ entry, idx }) {
 
 export default function Experience() {
   return (
-    <Section id="experience" index="02" title="Experience">
+    <Section id="experience" index="04" title="Experience">
       <ol className="timeline">
         {experience.map((e, i) => (
           <TimelineEntry key={e.company + e.dates} entry={e} idx={i} />

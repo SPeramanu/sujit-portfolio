@@ -211,6 +211,19 @@ button {
 }
 .btn:disabled { opacity: 0.5; }
 
+/* Tinted outline button — set --btn-accent per instance for a distinct,
+   theme-consistent colour. Fills with the accent on hover. */
+.btn-tint {
+  background: transparent;
+  border-color: var(--btn-accent, var(--accent));
+  color: var(--btn-accent, var(--accent));
+}
+.btn-tint:hover {
+  background: var(--btn-accent, var(--accent));
+  border-color: var(--btn-accent, var(--accent));
+  color: var(--surface);
+}
+
 /* ---------- card panels ---------- */
 .hud-frame {
   position: relative;
@@ -252,7 +265,7 @@ button {
 
 /* ---------- sections ---------- */
 .section {
-  padding: 110px 32px;
+  padding: 50px 32px;
   position: relative;
 }
 .section-inner {
@@ -873,6 +886,141 @@ button {
   height: 5px;
   border-radius: 50%;
   background: var(--accent);
+}
+
+/* ---------- coursework ---------- */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.course-tile {
+  --tile-accent: var(--accent);
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-top: 3px solid var(--tile-accent);
+  border-radius: 4px;
+  padding: 22px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.course-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.course-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.course-code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--tile-accent);
+  background: color-mix(in srgb, var(--tile-accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tile-accent) 40%, transparent);
+  padding: 3px 9px;
+  border-radius: 3px;
+}
+.course-term {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+}
+
+.course-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 14px;
+  /* reserve 2 lines so every tile's bullet list starts at the same height */
+  min-height: calc(2 * 1.25 * 20px);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.course-bullets {
+  list-style: none;
+  margin: 0 0 18px;
+  /* Height is set per-row by Coursework.jsx so every tile in a row matches
+     and the bullets fill the available space. This max-height is only the
+     fallback for the first paint / if JS is unavailable. */
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 10px;
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--tile-accent) 55%, transparent) transparent;
+}
+/* WebKit scrollbar, tinted to the tile accent */
+.course-bullets::-webkit-scrollbar {
+  width: 6px;
+}
+.course-bullets::-webkit-scrollbar-track {
+  background: transparent;
+}
+.course-bullets::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--tile-accent) 55%, transparent);
+  border-radius: 3px;
+}
+.course-bullets::-webkit-scrollbar-thumb:hover {
+  background: var(--tile-accent);
+}
+.course-bullets li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 8px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.course-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tile-accent);
+}
+
+.course-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+.course-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--tile-accent);
+  border: 1px solid color-mix(in srgb, var(--tile-accent) 45%, transparent);
+  border-radius: 3px;
+  padding: 6px 12px;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+.course-link:hover {
+  background: var(--tile-accent);
+  color: var(--surface);
+  transform: translateY(-1px);
 }
 
 /* ---------- projects ---------- */
@@ -2226,6 +2374,7 @@ kbd {
   .about-panel { position: static; }
   .modal-body { grid-template-columns: 1fr; }
   .modal-media { border-right: none; border-bottom: 1px solid var(--line); }
+  .course-grid { grid-template-columns: repeat(2, 1fr); }
 
   /* hero: stack with the portrait on top so it's the first thing seen */
   .hero { align-items: flex-start; }
@@ -2260,6 +2409,7 @@ kbd {
   .nav-links a { font-size: 16px; }
 
   .section-title { letter-spacing: 2px; }
+  .course-grid { grid-template-columns: 1fr; }
   .timeline { padding-left: 28px; }
   .timeline-node { left: -28px; }
   .globe-header { flex-direction: column; align-items: flex-start; gap: 12px; }
