@@ -104,7 +104,8 @@ export const projects = [
     video: 'assets/videos/oct_view.mp4', // e.g. 'assets/videos/oct-demo.mp4'
     youtube: null,
     images: [
-      'assets/projects/OCT_system.jpg'],
+      'assets/projects/OCT_system.jpg',
+      'assets/projects/OCT_pipeline.png',],
   },
   {
     id: 'drone-capstone',
@@ -138,7 +139,7 @@ export const projects = [
           title: 'Full CV pipeline',
           body: [
             'The system needed to localize a moving ground target in 3D from a drone hovering at 0.5 m, using only edge hardware. I built the full perception pipeline: a custom-trained YOLOv8n model, exported to ONNX and compiled as a TensorRT FP16 engine on the Jetson Nano, running asynchronously via PyCUDA so MAVROS flight-control callbacks were never blocked.',
-            "Depth came from the T265's stereo fisheye pair using Kannala-Brandt undistortion and CLAHE preprocessing. I implemented a dynamic adaptive EMA filter that tightens smoothing during hover and loosens it during rapid motion, which was a deliberate design choice to balance noise suppression against responsiveness. I also added per-frame depth jump rejection (>1 m threshold) to handle flight vibrations.",
+            "Depth came from the T265's stereo fisheye pair using Kannala-Brandt undistortion and CLAHE preprocessing. I implemented an adaptive EMA filter to smooth the disparity map across frames. I tightened smoothing during hover and loosened it during rapid motion, which was a deliberate design choice to balance noise suppression against responsiveness. I also added per-frame depth jump rejection (>1 m threshold) to handle flight vibrations.",
             'Fusing the 2D centroid from the IMX219 with T265 depth required precise cross-camera calibration using Kalibr on an AprilGrid target, providing the rigid transformation matrix between the two sensor frames. I back-projected the detected centroid through IMX intrinsics, transformed it to the fisheye frame, then reconstructed the full 3D point. The result was within 5cm accuracy at 1-2m distances, and robust real-time detection through varied lighting and shadows in flight.',
           ],
         },
